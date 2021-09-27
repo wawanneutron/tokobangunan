@@ -1,5 +1,5 @@
 .border-top-orange {
-  border-top: 3px solid $color-orange !important;
+  border-top: 3px solid $color-red !important;
   border-radius: 8px;
 }
 .auth {
@@ -11,7 +11,7 @@
   form {
     margin-top: 30px;
     span {
-      color: $color-orange;
+      color: $color-red;
     }
   }
   .btn-login {

@@ -1,36 +1,34 @@
 <template>
   <header class="section-header fixed-top">
-    <section class="header-main border-bottom">
+    <section class="header-main">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="col-md-3 col-7">
-            <router-link to="/" class="text-decoration-none" data-abc="true">
-              <span class="logo"
-                ><i class="fas fa-shopping-bag me-2"></i>Jhopri
-              </span></router-link
-            >
+          <div class="col-md-3 col-3">
+            <router-link to="/" data-abc="true">
+              <img
+                src="https://www.mitraruma.com/_nuxt/img/Logo-Mitraruma.531cabd.svg"
+                alt=""
+                class="img-company"
+              />
+            </router-link>
           </div>
           <div class="col-md-5 d-none d-md-block">
             <form class="search-wrap">
               <div class="input-group">
                 <input
                   type="text"
-                  class="form-control"
-                  placeholder="mau belanja apa hari ini ?"
-                  aria-label="mau belanja apa hari ini ?"
-                  aria-describedby="button-addon2"
+                  class="form-control form-search"
+                  placeholder="search..."
+                  aria-label="search..."
+                  aria-describedby="addon-wrapping"
                 />
-                <button
-                  class="btn search-button"
-                  type="button"
-                  id="button-addon2"
-                >
-                  <i class="fa fa-search"></i>
-                </button>
+                <span class="input-group-text search-button" id="addon-wrapping"
+                  ><i class="fa fa-search"></i
+                ></span>
               </div>
             </form>
           </div>
-          <div class="col-md-4 col-5">
+          <div class="col-md-4 col-9">
             <div class="d-flex justify-content-end">
               <div class="cart-header">
                 <router-link
@@ -46,7 +44,7 @@
       </div>
     </section>
     <!-- sub navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar shadow navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <div class="row">
           <div class="col-2">
@@ -62,20 +60,19 @@
               <span class="navbar-toggler-icon" style="font-size: 20px"></span>
             </button>
           </div>
-          <div class="col-10">
+          <div class="col-10 d-md-none">
             <form class="search-wrap">
-              <div class="input-group d-md-none">
+              <div class="input-group">
                 <input
                   type="text"
-                  class="form-control search-form"
-                  name="q"
-                  placeholder="mau beli apa hari ini ?"
+                  class="form-control form-search"
+                  placeholder="search..."
+                  aria-label="search..."
+                  aria-describedby="addon-wrapping"
                 />
-                <div class="input-group-append">
-                  <button class="btn search-button-mobile" type="submit">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
+                <span class="input-group-text search-button" id="addon-wrapping"
+                  ><i class="fa fa-search"></i
+                ></span>
               </div>
             </form>
           </div>
@@ -114,12 +111,17 @@
             </li>
           </ul>
           <div class="account">
-            <router-link :to="{ name: 'login' }" class="btn"
-              ><i class="fa fa-user-circle"></i> Account</router-link
+            <router-link :to="{ name: 'login' }" class="btn btn-login"
+              ><i class="fa fa-user-circle"></i> Masuk</router-link
             >
-            <router-link :to="{ name: 'dashboard' }" class="btn"
+            <router-link
+              :to="{ name: 'register' }"
+              class="btn btn-register ms-3"
+              ><i class="fa fa-user-circle"></i> Register</router-link
+            >
+            <!-- <router-link :to="{ name: 'dashboard' }" class="btn"
               ><i class="fa fa-tachometer-alt"></i>Dashboard</router-link
-            >
+            > -->
           </div>
         </div>
       </div>

@@ -5,13 +5,26 @@
     data-bs-ride="carousel"
   >
     <div class="carousel-inner">
-      <div
-        class="carousel-item"
-        v-for="(data, id) of carousel"
-        :key="data.id"
-        :class="{ active: id == 0 }"
-      >
-        <img :src="data.image" class="d-block w-100" alt="carousel" />
+      <div class="carousel-item active">
+        <img
+          src="https://strapi-cms-prod-bucket.s3.ap-southeast-1.amazonaws.com/304ff221_eb79_4ef5_b163_29b0aa211063_2016834035.jpg"
+          class="d-block w-100"
+          alt="carousel"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://strapi-cms-prod-bucket.s3.ap-southeast-1.amazonaws.com/626dbf8f_9a76_4539_8bd4_9c9e1ef22b7c_1af3ee2fbb.jpg"
+          class="d-block w-100"
+          alt="carousel"
+        />
+      </div>
+      <div class="carousel-item">
+        <img
+          src="https://strapi-cms-prod-bucket.s3.ap-southeast-1.amazonaws.com/ca751f10_2cd8_43ff_a929_54766d22217a_15c58e3bd4.jpg"
+          class="d-block w-100"
+          alt="carousel"
+        />
       </div>
     </div>
     <button
@@ -40,22 +53,22 @@
 </template>
 
 <script>
-import { computed, onMounted } from "@vue/runtime-core";
-import { useStore } from "vuex";
-export default {
-  setup() {
-    const store = useStore();
+// import { computed, onMounted } from "@vue/runtime-core";
+// import { useStore } from "vuex";
+// export default {
+//   setup() {
+//     const store = useStore();
 
-    onMounted(() => {
-      store.dispatch("carousel/carousel");
-    });
-    const carousel = computed(() => {
-      return store.getters["carousel/getCarousel"];
-    });
+//     onMounted(() => {
+//       store.dispatch("carousel/carousel");
+//     });
+//     const carousel = computed(() => {
+//       return store.getters["carousel/getCarousel"];
+//     });
 
-    return {
-      carousel,
-    };
-  },
-};
+//     return {
+//       carousel,
+//     };
+//   },
+// };
 </script>

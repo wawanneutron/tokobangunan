@@ -1,34 +1,54 @@
 .section-header {
-  background-color: $color-orange;
-  color: $color-white;
-
+  background-color: $color-text-white;
+  color: $color-text;
   .header-main {
-    padding: 10px 0;
+    padding: 5px 0 0 0;
     span {
-      color: $color-white;
+      color: $color-text;
     }
     .search-button {
-      background-color: $color-white;
-      color: $color-orange;
+      background-color: $color-text-white;
+      color: $color-red;
       padding: 6px 10px;
+      border-radius: 20px;
+    }
+    .form-search {
+      border-radius: 20px;
+      border-right: none;
+      padding: 10px 20px;
+    }
+    .form-control::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: rgba(255, 0, 0, 0.548);
+      opacity: 1; /* Firefox */
+    }
+
+    .form-control:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: rgba(255, 0, 0, 0.548);
+    }
+
+    .form-control::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: rgba(255, 0, 0, 0.548);
     }
   }
   .navbar {
     padding: 10px 0;
-    input {
-      border: 1px solid $color-white;
-    }
-    // .search-form {
-    //   width: 100px;
-    // }
     .search-button-mobile {
       padding: 6px;
     }
     .navbar-toggler {
       padding: 4px;
     }
-    .navbar-toggler-icon {
-      font-size: 15px;
+
+    .nav-item {
+      font-size: 16px;
+
+      a {
+        color: #020202;
+        margin-left: 20px;
+      }
     }
     .dropdown-menu {
       padding: 20px;
@@ -40,18 +60,77 @@
           margin-right: 20px;
         }
         &:hover {
-          background-color: $color-orange;
-          color: $color-white;
+          background-color: $color-red;
+          color: $color-text;
           border-radius: 8px;
           transition: all 0.5s ease;
         }
       }
       .btn-more {
-        background-color: $color-orange;
-        color: $color-white;
+        background-color: $color-red;
+        color: $color-text;
         border-radius: 8px;
         &:hover {
           background-color: #922200;
+        }
+      }
+    }
+  }
+  .btn-register {
+    background-color: $color-red;
+    border-radius: 20px;
+    color: $color-text-white;
+  }
+  .btn-login {
+    border: 1px solid $color-red;
+    border-radius: 20px;
+    color: $color-red;
+    &:hover {
+      background-color: #f7e5e5;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    .header-main {
+      padding-top: 5px;
+    }
+    .img-company {
+      width: 60px;
+    }
+    .search-button {
+      background-color: $color-text-white;
+      color: $color-red;
+      padding: 6px 10px;
+      border-radius: 20px;
+    }
+    .form-search {
+      border-radius: 20px;
+      border-right: none;
+      padding: 10px 20px;
+    }
+    .form-control::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: rgba(255, 0, 0, 0.548);
+      opacity: 1; /* Firefox */
+    }
+
+    .form-control:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: rgba(255, 0, 0, 0.548);
+    }
+
+    .form-control::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: rgba(255, 0, 0, 0.548);
+    }
+    .navbar {
+      .navbar-toggler {
+        margin: 20% auto !important;
+
+        .navbar-toggler-icon {
+          font-size: 15px !important;
         }
       }
     }

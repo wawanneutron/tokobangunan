@@ -1,5 +1,6 @@
-$color-orange: #e64a19;
-$color-white: #fff;
+$color-red: #eb0000;
+$color-text: #123049;
+$color-text-white: #fff;
 $color-text-header: #123049;
 $color-text-subheader: #232f51;
 $color-text-paragraf: #7686ab;
@@ -15,15 +16,15 @@ $color-text-paragraf: #7686ab;
     color: $color-text-subheader;
   }
   .btn-orange {
-    background-color: $color-orange;
-    color: $color-white;
+    background-color: $color-red;
+    color: $color-text;
     &:hover {
       background-color: #922200;
     }
   }
   .router-link-exact-active.menuItem-active-link {
-    background-color: $color-orange;
-    color: $color-white;
+    background-color: $color-red;
+    color: $color-text;
     border-radius: 8px;
   }
 }
