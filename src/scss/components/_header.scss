@@ -1,0 +1,59 @@
+.section-header {
+  background-color: $color-orange;
+  color: $color-white;
+
+  .header-main {
+    padding: 10px 0;
+    span {
+      color: $color-white;
+    }
+    .search-button {
+      background-color: $color-white;
+      color: $color-orange;
+      padding: 6px 10px;
+    }
+  }
+  .navbar {
+    padding: 10px 0;
+    input {
+      border: 1px solid $color-white;
+    }
+    // .search-form {
+    //   width: 100px;
+    // }
+    .search-button-mobile {
+      padding: 6px;
+    }
+    .navbar-toggler {
+      padding: 4px;
+    }
+    .navbar-toggler-icon {
+      font-size: 15px;
+    }
+    .dropdown-menu {
+      padding: 20px;
+      .dropdown-item {
+        margin-top: 15px;
+        padding: 8px 24px;
+        img {
+          border-radius: 5px;
+          margin-right: 20px;
+        }
+        &:hover {
+          background-color: $color-orange;
+          color: $color-white;
+          border-radius: 8px;
+          transition: all 0.5s ease;
+        }
+      }
+      .btn-more {
+        background-color: $color-orange;
+        color: $color-white;
+        border-radius: 8px;
+        &:hover {
+          background-color: #922200;
+        }
+      }
+    }
+  }
+}
