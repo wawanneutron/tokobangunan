@@ -1,3 +1,67 @@
 footer {
   margin-top: 100px;
+  hr {
+    color: $color-text-paragraf;
+    margin-bottom: 60px;
+  }
+  .sub-footer {
+    color: $color-text-paragraf;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-text-header;
+    text-decoration: underline;
+  }
+  .content {
+    font-size: 15px;
+    margin-top: 50px;
+    font-weight: 500;
+
+    .title {
+      a {
+        line-height: 40px;
+        color: $color-text-subheader;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+          color: $color-text-paragraf;
+        }
+      }
+    }
+    .lingkaran {
+      position: relative;
+      font-size: 25px;
+      width: 40px;
+      height: 40px;
+      background-color: red;
+      border-radius: 100%;
+      float: left;
+      margin-bottom: 10px;
+      margin-right: 20px;
+      .btn-icon {
+        color: $color-text-white;
+        position: absolute;
+        top: 51%;
+        left: 51%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    .alamat {
+      .surel {
+        line-height: 35px;
+        margin-bottom: 20px;
+      }
+      clear: left;
+      color: $color-text-subheader;
+      p {
+        line-height: 35px;
+        i {
+          color: red;
+        }
+      }
+    }
+  }
 }

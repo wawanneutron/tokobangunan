@@ -117,7 +117,7 @@
             <router-link
               :to="{ name: 'register' }"
               class="btn btn-register ms-3"
-              ><i class="fa fa-user-circle"></i> Register</router-link
+              ><i class="fa fa-user-circle"></i> Registrasi</router-link
             >
             <!-- <router-link :to="{ name: 'dashboard' }" class="btn"
               ><i class="fa fa-tachometer-alt"></i>Dashboard</router-link
