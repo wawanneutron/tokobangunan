@@ -1,9 +1,39 @@
 .show-product {
   color: $color-text-header !important;
+  h1 {
+    font-size: 30px !important;
+    font-weight: 400;
+    text-shadow: 2px 2px 20px rgba(255, 0, 0, 0.397);
+  }
+  strong {
+    color: $color-text-header;
+    font-size: 20px;
+  }
+  .add-quantity {
+    strong {
+      color: $color-text-header;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    i {
+      color: red;
+      opacity: 0.5;
+    }
+  }
   span {
-    color: $color-text-header !important;
+    color: $color-text-header;
   }
   s {
-    text-decoration-color: red;
+    text-decoration-color: rgba(255, 0, 0, 0.753);
+    color: $color-text-paragraf;
+  }
+  .table {
+    tr {
+      td {
+        font-size: 16px;
+        font-weight: 300;
+        color: $color-text-header;
+      }
+    }
   }
 }

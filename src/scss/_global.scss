@@ -15,11 +15,15 @@ $color-text-paragraf: #7686ab;
   .sub-title {
     color: $color-text-subheader;
   }
-  .btn-orange {
-    background-color: $color-red;
-    color: $color-text;
+  .btn-costum {
+    border: 1px solid rgba(255, 0, 0, 0.644);
+    color: $color-red;
+    font-size: 18px;
+    border-radius: 50px;
+    box-shadow: 4px 4px 10px rgba(255, 0, 0, 0.473);
     &:hover {
-      background-color: #922200;
+      background-color: #f7e5e5;
+      box-shadow: 3px 5px 20px rgba(255, 0, 0, 0.459);
     }
   }
   .router-link-exact-active.menuItem-active-link {

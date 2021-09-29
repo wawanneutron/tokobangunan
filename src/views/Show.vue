@@ -1,9 +1,12 @@
 <template>
-  <div class="container-fluid mt-5 mb-5">
+  <div class="container mt-5 mb-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item parent">
           <router-link to="/">Home</router-link>
+        </li>
+        <li class="breadcrumb-item parent">
+          <router-link to="/products">Products</router-link>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
           Detail product
@@ -43,85 +46,108 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="card border-0 rounded shadow">
+        <div class="card border-0">
           <div class="card-body">
-            <label class="font-weight-bold" style="font-size: 20px">
-              {{ product.title }}
-            </label>
-            <hr />
-            <div
-              class="price-product"
-              id="price-product"
-              style="font-size: 1.35rem"
-            >
-              <span class="font-weight-bold me-4"
-                >Rp. {{ moneyFormat(calculateDiscount(product)) }}</span
-              >
-              <s class="font-weight-bold"
-                >Rp. {{ moneyFormat(product.price) }}</s
-              >
+            <h1>{{ product.title }}</h1>
+            <div class="rating-detail mt-2">
+              <star-rating
+                :show-rating="true"
+                :star-size="23"
+                :read-only="true"
+                :increment="0.01"
+                :rating="4.5"
+              ></star-rating>
             </div>
-            <table class="table table-show table-borderless mt-3">
+            <div class="price-product mt-4" id="price-product">
+              <strong class="font-weight-bold me-4"
+                >Rp. {{ moneyFormat(calculateDiscount(product)) }}</strong
+              >
+              <span>/ Pc / Pcs</span>
+              <div>
+                <s class="font-weight-bold" style="font-size: 15px"
+                  >Rp. {{ moneyFormat(product.price) }}</s
+                >
+              </div>
+            </div>
+            <hr />
+            <table class="table table-hover mt-3">
               <tbody>
                 <tr>
-                  <td class="font-weight-bold">DISKON</td>
-                  <td>:</td>
+                  <td class="font-weight-bold">Diskon</td>
+                  <td class="w-25">:</td>
                   <td>
-                    <button
-                      class="btn btn-sm"
-                      style="color: #ff2f00; border-color: #ff2f00"
-                    >
-                      DISKON {{ product.discount }} %
-                    </button>
+                    <span>{{ product.discount }} % </span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="font-weight-bold">BERAT</td>
+                  <td class="font-weight-bold">Berat</td>
                   <td>:</td>
                   <td>
-                    <span
-                      class="badge badge-pill badge-success"
-                      style="
-                        font-size: 14px;
-                        border-radius: 0.3rem;
-                        padding: 0.25em 0.5em 0.2em;
-                      "
-                    >
-                      {{ product.weight }} gram</span
-                    >
+                    <span> {{ product.weight }} gram</span>
                   </td>
                 </tr>
                 <tr>
-                  <td class="font-weight-bold">STOCK</td>
+                  <td class="font-weight-bold">stock tersedia</td>
                   <td>:</td>
                   <td>
-                    <span
-                      class="badge badge-pill badge-warning"
-                      style="
-                        font-size: 14px;
-                        border-radius: 0.3rem;
-                        padding: 0.25em 0.5em 0.2em;
-                      "
-                    >
-                      {{ product.stock }} stock</span
-                    >
+                    <span> {{ product.stock }} stock</span>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <div>
-              <button
-                @click="
-                  addToCart(
-                    calculateDiscount(product),
-                    product.id,
-                    product.weight
-                  )
-                "
-                class="btn btn-orange btn-lg btn-block"
-              >
-                <i class="fa fa-shopping-cart"></i> TAMBAH KE KERANJANG
-              </button>
+            <div class="add-quantity mt-5">
+              <div class="row justify-content-around">
+                <div class="col-lg-5 col-md-6">
+                  <label for="add-quantity"
+                    ><strong>Qty (PC / Pcs)</strong></label
+                  >
+                  <div class="input-group mb-3 mt-3">
+                    <span class="input-group-text">-</span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="0"
+                      aria-label="Amount (to the nearest dollar)"
+                    />
+                    <span class="input-group-text">+</span>
+                  </div>
+                </div>
+                <div class="col-lg-2 mt-5 text-center d-lg-block d-none">
+                  <i style="font-size: 20px" class="fas fa-arrow-right"></i>
+                </div>
+                <div class="col-lg-2 mb-2 text-center d-lg-none d-sm-block">
+                  <i style="font-size: 18px" class="fas fa-arrow-down"></i>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                  <label>
+                    <strong>Subtotal (Rp)</strong>
+                  </label>
+                  <input
+                    class="form-control mt-3"
+                    type="text"
+                    value="Rp. 350.000"
+                    aria-label="Disabled input example"
+                    disabled
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <button
+                  @click="
+                    addToCart(
+                      calculateDiscount(product),
+                      product.id,
+                      product.weight
+                    )
+                  "
+                  class="btn btn-costum float-md-end btn-lg btn-block mt-4"
+                >
+                  <i class="fa fa-shopping-cart"></i> Masukan Ke Keranjang
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -143,7 +169,12 @@
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
+import StarRating from "vue-star-rating";
+
 export default {
+  components: {
+    StarRating,
+  },
   setup() {
     const store = useStore();
     const route = useRoute();

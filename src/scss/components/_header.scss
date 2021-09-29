@@ -1,6 +1,9 @@
 .section-header {
   background-color: $color-text-white;
   color: $color-text;
+  .img-company {
+    width: 80px;
+  }
   .header-main {
     padding: 5px 0 0 0;
     span {
@@ -34,7 +37,7 @@
     }
   }
   .navbar {
-    padding: 10px 0;
+    padding: 0 0 10px 0;
     .search-button-mobile {
       padding: 6px;
     }
@@ -46,8 +49,14 @@
       font-size: 16px;
 
       a {
-        color: #020202;
-        margin-left: 20px;
+        color: $color-text-header;
+        font-weight: 300;
+        text-shadow: 3px 2px 10px rgba(255, 0, 0, 0.747);
+        margin-left: 50px;
+        font-size: 15px;
+        i {
+          display: none;
+        }
       }
     }
     .dropdown-menu {
