@@ -5,7 +5,7 @@
       <h1>Wujudkan desain impian Anda sesuai anggaran</h1>
     </div>
     <main>
-      <div class="row row-service text-center mt-5">
+      <div class="row row-service text-center">
         <div class="col-md-4">
           <img
             src="https://www.mitraruma.com/_nuxt/img/icon-Value-1-36.1f0b4b1.svg"
@@ -21,9 +21,9 @@
             src="https://www.mitraruma.com/_nuxt/img/icon-Value-2-36.fbbe743.svg"
             alt=""
           />
-          <div class="title">Pengiriman cepat</div>
+          <div class="title">Pengiriman cepat & gratis</div>
           <div class="subtitle">
-            Ditambah 3-5 hari pengiriman untuk ribuan item.
+            Demi kepuasan custommer kami menyediakan pengiriman gratis
           </div>
         </div>
         <div class="col-md-4">
@@ -175,9 +175,7 @@
             Klik disini dan temukan berbagai inspirasi untuk mempercantik rumah
             kesayangan anda.
           </div>
-          <a href="#" class="btn btn-home shadow-lg text-uppercase"
-            >Temukan Inspirasi</a
-          >
+          <a href="#" class="btn btn-auth mt-5 shadow-lg">Temukan Inspirasi</a>
         </div>
       </div>
       <div class="col-md-6 col-carousel">
@@ -233,7 +231,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h3 class="mb-3">Product Terbaru Kami</h3>
+            <h1>Product Terbaru Kami</h1>
           </div>
           <div class="product-terbaru">
             <div class="row">

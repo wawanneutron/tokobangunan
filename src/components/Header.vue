@@ -33,9 +33,22 @@
               <div class="cart-header">
                 <router-link
                   :to="{ name: 'cart' }"
-                  class="btn search-button btn-md"
-                  ><i class="fa fa-shopping-cart"></i> {{ cartCount }} | Rp.
-                  {{ moneyFormat(cartTotal) }}
+                  class="btn me-2 btn-cart position-relative"
+                >
+                  Rp. {{ moneyFormat(cartTotal) }}
+                  <span
+                    class="
+                      position-absolute
+                      top-0
+                      start-100
+                      translate-middle
+                      badge
+                      rounded-pill
+                      bg-danger
+                    "
+                  >
+                    <i class="fa fa-shopping-cart me-1"></i>{{ cartCount }}
+                  </span>
                 </router-link>
               </div>
             </div>
@@ -111,17 +124,24 @@
             </li>
           </ul>
           <div class="account">
-            <router-link :to="{ name: 'login' }" class="btn btn-login"
+            <router-link
+              v-if="!isLoggedIn"
+              :to="{ name: 'login' }"
+              class="btn btn-auth-two"
               ><i class="fa fa-user-circle"></i> Masuk</router-link
             >
             <router-link
+              v-if="!isLoggedIn"
               :to="{ name: 'register' }"
-              class="btn btn-register ms-3"
+              class="btn btn-auth ms-3"
               ><i class="fa fa-user-circle"></i> Registrasi</router-link
             >
-            <!-- <router-link :to="{ name: 'dashboard' }" class="btn"
+            <router-link
+              v-if="isLoggedIn"
+              :to="{ name: 'dashboard' }"
+              class="btn btn-auth-two"
               ><i class="fa fa-tachometer-alt"></i>Dashboard</router-link
-            > -->
+            >
           </div>
         </div>
       </div>
@@ -153,12 +173,16 @@ export default {
     const cartTotal = computed(() => {
       return store.getters["cart/getTotalCart"];
     });
+    const isLoggedIn = computed(() => {
+      return store.getters["auth/isLoggedIn"];
+    });
 
     console.log([cartCount, cartTotal]);
 
     return {
       cartCount,
       cartTotal,
+      isLoggedIn,
     };
   },
 };

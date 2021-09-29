@@ -15,6 +15,19 @@
       padding: 6px 10px;
       border-radius: 20px;
     }
+    .btn-cart {
+      background-color: $color-text-white;
+      color: $color-red;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      .badge {
+        color: $color-text-white;
+        letter-spacing: normal;
+        font-size: 12px;
+      }
+    }
     .form-search {
       border-radius: 20px;
       border-right: none;
@@ -85,19 +98,6 @@
       }
     }
   }
-  .btn-register {
-    background-color: $color-red;
-    border-radius: 20px;
-    color: $color-text-white;
-  }
-  .btn-login {
-    border: 1px solid $color-red;
-    border-radius: 20px;
-    color: $color-red;
-    &:hover {
-      background-color: #f7e5e5;
-    }
-  }
 }
 
 @media (max-width: 768px) {
@@ -113,6 +113,20 @@
       color: $color-red;
       padding: 6px 10px;
       border-radius: 20px;
+    }
+    .btn-cart {
+      background-color: $color-text-white;
+      color: $color-red;
+      padding: 6px 10px;
+      border-radius: 20px;
+      margin-top: 5px;
+      font-size: 13px !important;
+      letter-spacing: 1px !important;
+
+      .badge {
+        color: $color-text-white;
+        font-size: 10px !important;
+      }
     }
     .form-search {
       border-radius: 20px;

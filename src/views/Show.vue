@@ -143,7 +143,7 @@
                       product.weight
                     )
                   "
-                  class="btn btn-costum float-md-end btn-lg btn-block mt-4"
+                  class="btn btn-auth float-md-end btn-lg btn-block mt-4"
                 >
                   <i class="fa fa-shopping-cart"></i> Masukan Ke Keranjang
                 </button>

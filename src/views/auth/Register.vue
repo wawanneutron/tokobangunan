@@ -73,16 +73,18 @@
                         v-model="user.confirm"
                       />
                     </div>
-                    <div
-                      v-if="valid.password"
-                      class="alert alert-danger mt-2"
-                    >
+                    <div v-if="valid.password" class="alert alert-danger mt-2">
                       {{ valid.password[0] }}
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="d-grid d-md-block btn-login text-end">
-                      <button class="btn btn-orange">REGISTER</button>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <input type="hidden" />
+                  </div>
+                  <div class="col-lg-6 mt-3">
+                    <div class="d-grid">
+                      <button class="btn btn-auth">Register</button>
                     </div>
                   </div>
                 </div>

@@ -3,7 +3,7 @@
   border-radius: 8px;
 }
 .auth {
-  margin-top: 180px !important;
+  margin-top: 80px;
   .title {
     font-size: 28px;
     color: $color-text-header;
@@ -14,13 +14,39 @@
       color: $color-red;
     }
   }
-  .btn-login {
-    margin-top: 25px;
-  }
+
   .title-register {
     color: $color-text-subheader;
     a {
       color: $color-text-subheader;
     }
+  }
+}
+.btn-auth {
+  background-color: $color-red;
+  border-radius: 50px;
+  color: $color-text-white !important;
+  transition: all 0.7s ease;
+  letter-spacing: 5px;
+  font-size: 14px;
+  &:hover {
+    background-color: #f7e5e5;
+    border-radius: 50px;
+    color: $color-red !important;
+  }
+}
+
+.btn-auth-two {
+  background-color: #f7e5e5;
+  border-radius: 50px;
+  color: $color-red;
+  transition: all 0.7s ease;
+  letter-spacing: 5px;
+  font-size: 14px;
+  &:hover {
+    background-color: $color-text-white;
+    border: 1px solid $color-red;
+    border-radius: 50px;
+    color: $color-red;
   }
 }

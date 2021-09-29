@@ -43,8 +43,8 @@
                 <div v-if="valid.password" class="alert alert-danger mt-1">
                   {{ valid.password[0] }}
                 </div>
-                <div class="d-grid btn-login">
-                  <button class="btn btn-orange">LOGIN</button>
+                <div class="d-grid" style="margin-top: 30px">
+                  <button class="btn btn-auth">Login</button>
                 </div>
               </form>
             </div>

@@ -6,7 +6,7 @@ $color-text-subheader: #232f51;
 $color-text-paragraf: #7686ab;
 
 #app {
-  margin-top: 150px;
+  padding-top: 150px;
   font-family: "Poppins", sans-serif;
   h1 {
     font-size: 24px;
@@ -15,17 +15,7 @@ $color-text-paragraf: #7686ab;
   .sub-title {
     color: $color-text-subheader;
   }
-  .btn-costum {
-    border: 1px solid rgba(255, 0, 0, 0.644);
-    color: $color-red;
-    font-size: 18px;
-    border-radius: 50px;
-    box-shadow: 4px 4px 10px rgba(255, 0, 0, 0.473);
-    &:hover {
-      background-color: #f7e5e5;
-      box-shadow: 3px 5px 20px rgba(255, 0, 0, 0.459);
-    }
-  }
+
   .router-link-exact-active.menuItem-active-link {
     background-color: $color-red;
     color: $color-text;
