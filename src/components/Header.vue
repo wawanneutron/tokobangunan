@@ -47,7 +47,8 @@
                       bg-danger
                     "
                   >
-                    <i class="fa fa-shopping-cart me-1"></i>{{ cartCount }}
+                    <img src="@/assets/shopping_cart_white_18dp.svg" alt="" />
+                    {{ cartCount }}
                   </span>
                 </router-link>
               </div>
@@ -58,7 +59,7 @@
     </section>
     <!-- sub navbar -->
     <nav class="navbar shadow navbar-expand-lg navbar-light bg-light">
-      <div class="container">
+      <div class="container-fluid mt-1">
         <div class="row">
           <div class="col-2">
             <button
@@ -128,7 +129,7 @@
               v-if="!isLoggedIn"
               :to="{ name: 'login' }"
               class="btn btn-auth-two"
-              ><i class="fa fa-user-circle"></i> Masuk</router-link
+              ><i class="fas fa-sign-in-alt me-2"></i>Masuk</router-link
             >
             <router-link
               v-if="!isLoggedIn"

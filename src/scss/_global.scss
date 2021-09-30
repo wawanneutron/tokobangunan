@@ -21,6 +21,29 @@ $color-text-paragraf: #7686ab;
     color: $color-text;
     border-radius: 8px;
   }
+  .chat-box {
+    width: 60px;
+    height: 60px;
+    background: #aa0814;
+    border-radius: 50%;
+    color: #fff;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 999;
+    transition: all 0.2s ease-in-out;
+
+    img {
+      margin-top: 12px;
+      margin-left: 12px;
+    }
+    &:hover {
+      transition: all 0.5s;
+      background: $color-red;
+      box-shadow: 10px 10px 44px 16px rgba(0, 0, 0, 0.26%);
+      bottom: 30px;
+    }
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
