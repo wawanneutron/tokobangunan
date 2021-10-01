@@ -605,6 +605,8 @@
 
 .show-product {
   color: #123049 !important;
+  /* Chrome, Safari, Edge, Opera */
+  /* Firefox */
 }
 
 .show-product h1 {
@@ -643,6 +645,35 @@
   font-size: 16px;
   font-weight: 300;
   color: #123049;
+}
+
+.show-product input::-webkit-outer-spin-button,
+.show-product input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.show-product input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.show-product input {
+  border: 2px solid #383838;
+}
+
+.show-product .input-group-text {
+  border-right: 2px solid #383838;
+  border-top: 2px solid #383838;
+  border-bottom: 2px solid #383838;
+  color: #383838;
+  font-weight: 500;
+}
+
+.show-product .plus {
+  border-right: none;
+  border-left: 2px solid #383838;
+  border-top: 2px solid #383838;
+  border-bottom: 2px solid #383838;
 }
 
 .categories a {

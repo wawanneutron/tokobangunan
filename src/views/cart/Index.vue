@@ -89,7 +89,10 @@
                 <tr>
                   <td class="set-td text-left border-0">
                     <p class="m-0">
-                      ONGKOS KIRIM (<strong> {{ weight }} </strong> gram)
+                      ONGKOS KIRIM (<strong>
+                        {{ calculateKilo(weight) }}
+                      </strong>
+                      Kilogram)
                     </p>
                   </td>
                   <td class="set-td border-0 text-right">&nbsp; :</td>

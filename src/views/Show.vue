@@ -83,7 +83,7 @@
                   <td class="font-weight-bold">Berat</td>
                   <td>:</td>
                   <td>
-                    <span> {{ product.weight }} gram</span>
+                    <span> {{ calculateKilogram(product) }} Kilogram</span>
                   </td>
                 </tr>
                 <tr>
@@ -102,14 +102,34 @@
                     ><strong>Qty (PC / Pcs)</strong></label
                   >
                   <div class="input-group mb-3 mt-3">
-                    <span class="input-group-text">-</span>
+                    <button
+                      @click="decrement"
+                      class="input-group-text plus disabled"
+                    >
+                      -
+                    </button>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       placeholder="0"
                       aria-label="Amount (to the nearest dollar)"
+                      v-model="state.qty"
+                      @input="checkQty(state.qty)"
                     />
-                    <span class="input-group-text">+</span>
+                    <button
+                      @click="increment"
+                      class="input-group-text disabled"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div
+                    v-if="state.qty > product.stock"
+                    style="margin-top: -18px"
+                  >
+                    <span style="font-size: 12px; color: red; font-weight: bold"
+                      >*kuantitas yang kamu masukan melebihi stock</span
+                    >
                   </div>
                 </div>
                 <div class="col-lg-2 mt-5 text-center d-lg-block d-none">
@@ -125,7 +145,10 @@
                   <input
                     class="form-control mt-3"
                     type="text"
-                    value="Rp. 350.000"
+                    :value="
+                      'Rp. ' +
+                      moneyFormat(state.qty * calculateDiscount(product))
+                    "
                     aria-label="Disabled input example"
                     disabled
                     readonly
@@ -134,18 +157,50 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12">
+              <!-- button add to cart  -->
+              <div class="col-12" v-if="state.qty > product.stock">
                 <button
-                  @click="
-                    addToCart(
-                      calculateDiscount(product),
-                      product.id,
-                      product.weight
-                    )
+                  class="
+                    btn btn-auth
+                    float-md-end
+                    btn-lg btn-block
+                    mt-4
+                    disabled
                   "
-                  class="btn btn-auth float-md-end btn-lg btn-block mt-4"
                 >
-                  <i class="fa fa-shopping-cart"></i> Masukan Ke Keranjang
+                  <img src="@/assets/shopping_cart_white_18dp.svg" alt="" />
+                  Stock tidak cukup
+                </button>
+              </div>
+              <div v-if="state.btnAddCart">
+                <div class="col-12" v-if="state.qty > 0">
+                  <button
+                    @click="
+                      addToCart(
+                        state.qty * calculateDiscount(product),
+                        product.id,
+                        product.weight * state.qty
+                      )
+                    "
+                    class="btn btn-auth float-md-end btn-lg btn-block mt-4"
+                  >
+                    <img src="@/assets/shopping_cart_white_18dp.svg" alt="" />
+                    Masukan Ke Keranjang
+                  </button>
+                </div>
+              </div>
+              <div class="col-12" v-if="state.qty <= 0">
+                <button
+                  class="
+                    btn btn-auth
+                    float-md-end
+                    btn-lg btn-block
+                    mt-4
+                    disabled
+                  "
+                >
+                  <img src="@/assets/shopping_cart_white_18dp.svg" alt="" />
+                  Masukan Ke Keranjang
                 </button>
               </div>
             </div>
@@ -166,7 +221,7 @@
   </div>
 </template>
 <script>
-import { computed, onMounted } from "@vue/runtime-core";
+import { computed, onMounted, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import StarRating from "vue-star-rating";
@@ -191,16 +246,24 @@ export default {
       return store.getters["product/getGalleries"];
     });
 
+    const state = reactive({
+      qty: "",
+      subTotal: "",
+      btnAddCart: true,
+      btnMinus: true,
+    });
+
     const addToCart = (price, id, weight) => {
       const token = store.state.auth.token;
       if (!token) {
         return router.push({ name: "login" });
       }
+      console.log(price, id, weight, state.qty);
       store.dispatch("cart/addToCart", {
         price: price,
         product_id: id,
         weight: weight,
-        quantity: 1,
+        quantity: state.qty,
       });
     };
 
@@ -208,6 +271,7 @@ export default {
       product,
       gallery,
       addToCart,
+      state,
     };
   },
   data: () => ({
@@ -216,6 +280,35 @@ export default {
   methods: {
     changeActive(id) {
       this.photoActive = id;
+    },
+    checkQty(qty) {
+      if (qty > this.product.stock) {
+        console.log("stock hanya tersedia " + this.product.stock);
+        this.state.btnAddCart = false;
+      } else if (qty < this.product.stock) {
+        this.state.btnAddCart = true;
+      } else {
+        console.log("stock ready ");
+      }
+    },
+    /* incremnt decrement */
+    increment() {
+      this.state.qty++;
+      this.state.btnAddCart = true;
+      if (this.state.qty > this.product.stock) {
+        this.state.btnAddCart = false;
+      }
+    },
+    decrement() {
+      if (this.state.qty === 0) {
+        console.log("Negative quantity not allowed");
+      } else {
+        this.state.qty--;
+        this.state.btnAddCart = true;
+        if (this.state.qty > this.product.stock) {
+          this.state.btnAddCart = false;
+        }
+      }
     },
   },
 };

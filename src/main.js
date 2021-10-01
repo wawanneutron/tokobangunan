@@ -24,6 +24,15 @@ app.mixin({
     calculateDiscount(product) {
       return product.price - (product.price * product.discount) / 100;
     },
+
+    // konversi dari gram ke kilogram
+    calculateKilogram(product) {
+      return product.weight / 1000;
+    },
+    // konversi dari gram ke kilogram
+    calculateKilo(weight) {
+      return weight / 1000;
+    },
   },
 });
 app.mount("#app");
