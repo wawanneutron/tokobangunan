@@ -676,6 +676,97 @@
   border-bottom: 2px solid #383838;
 }
 
+.chart-product h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #123049;
+}
+
+.chart-product .card-chart {
+  margin-top: 20px;
+}
+
+.chart-product thead tr {
+  color: #232f51;
+}
+
+.chart-product td .diskon {
+  color: #7686ab;
+  font-size: 12px !important;
+}
+
+.chart-product td .diskon s {
+  -webkit-text-decoration-color: rgba(255, 0, 0, 0.486);
+          text-decoration-color: rgba(255, 0, 0, 0.486);
+}
+
+.chart-product td .price {
+  color: #232f51;
+  font-weight: 600;
+}
+
+.chart-product td .btn-trash {
+  background-color: rgba(139, 161, 180, 0.562);
+  color: white;
+  font-size: 12px;
+}
+
+.chart-product .title {
+  color: #232f51;
+}
+
+.chart-product .card-detail {
+  margin-top: 45px;
+}
+
+.chart-product .card-detail .card-header {
+  background-color: #393939;
+  color: #fff;
+  font-weight: 600;
+  padding: 18px 16px;
+  border-radius: 8px 8px 0 0;
+}
+
+.chart-product .card-detail .card-body {
+  margin-top: 10px;
+}
+
+.chart-product .card-detail .card-body .card-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.chart-product .card-detail .card-body .card-informations {
+  margin-top: 15px;
+}
+
+.chart-product .card-detail .card-body .card-informations tr > td {
+  padding-bottom: 10px;
+}
+
+.chart-product .card-detail .card-body .total {
+  font-weight: 600;
+  color: red;
+}
+
+.chart-product .card-detail .card-body i {
+  font-weight: 300;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.chart-product .card-detail .btn-pembayaran {
+  font-weight: bold !important;
+  letter-spacing: 0;
+  font-size: 18px;
+  margin-top: 15px;
+  border-radius: unset !important;
+}
+
+.rincian-pengiriman .accordion h2 {
+  font-size: 18px;
+}
+
 .categories a {
   text-decoration: none;
 }
