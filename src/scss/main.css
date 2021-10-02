@@ -150,8 +150,9 @@
 }
 
 .section-header .header-main .btn-cart {
+  font-weight: 600;
   background-color: #fff;
-  color: #eb0000;
+  color: #123049;
   padding: 6px 10px;
   border-radius: 20px;
   font-size: 14px;
@@ -228,9 +229,8 @@
 }
 
 .section-header .navbar .nav-item a {
-  color: #eb0000;
+  color: #123049;
   font-weight: 500;
-  text-shadow: 1px 2px 10px rgba(255, 0, 0, 0.842);
   margin-left: 50px;
   font-size: 15px;
 }
@@ -286,7 +286,7 @@
   }
   .section-header .btn-cart {
     background-color: #fff;
-    color: #eb0000;
+    color: #123049;
     padding: 6px 10px;
     border-radius: 20px;
     margin-top: 5px;
@@ -690,6 +690,10 @@
   color: #232f51;
 }
 
+.chart-product td .title {
+  color: #232f51;
+}
+
 .chart-product td .diskon {
   color: #7686ab;
   font-size: 12px !important;
@@ -702,12 +706,12 @@
 
 .chart-product td .price {
   color: #232f51;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .chart-product td .btn-trash {
   background-color: rgba(139, 161, 180, 0.562);
-  color: white;
+  color: whitesmoke;
   font-size: 12px;
 }
 
@@ -737,34 +741,65 @@
 }
 
 .chart-product .card-detail .card-body .card-informations {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .chart-product .card-detail .card-body .card-informations tr > td {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+.chart-product .card-detail .card-body .harga-asli,
+.chart-product .card-detail .card-body .harga-stelah-diskon {
+  font-weight: 500;
+}
+
+.chart-product .card-detail .card-body .harga {
+  color: #7686ab;
 }
 
 .chart-product .card-detail .card-body .total {
-  font-weight: 600;
+  font-weight: bold;
+  font-size: 18px;
   color: red;
 }
 
 .chart-product .card-detail .card-body i {
   font-weight: 300;
   font-size: 12px;
-  color: #aaaaaa;
+  color: #7686ab;
 }
 
 .chart-product .card-detail .btn-pembayaran {
   font-weight: bold !important;
   letter-spacing: 0;
-  font-size: 18px;
+  font-size: 15px;
   margin-top: 15px;
   border-radius: unset !important;
 }
 
+.rincian-pengiriman {
+  margin-top: 50px;
+}
+
 .rincian-pengiriman .accordion h2 {
   font-size: 18px;
+  font-weight: 500;
+}
+
+.rincian-pengiriman .accordion h2 i {
+  font-size: 16px;
+}
+
+.rincian-pengiriman .accordion .accordion-body {
+  margin-top: 20px;
+}
+
+.rincian-pengiriman .accordion .accordion-body .form-group {
+  margin-bottom: 30px;
+}
+
+.rincian-pengiriman .accordion .accordion-body label {
+  margin-bottom: 10px;
 }
 
 .categories a {

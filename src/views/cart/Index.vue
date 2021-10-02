@@ -40,7 +40,7 @@
                       <td>
                         <div class="title">{{ cart.product.title }}</div>
                         <div class="qty mt-2">Qty: {{ cart.quantity }}</div>
-                        <div class="price mt-2">
+                        <div class="price mt-3">
                           Rp. {{ moneyFormat(calculateDiscount(cart.product)) }}
                         </div>
                         <div class="m-0 diskon">
@@ -132,33 +132,29 @@
           <div class="card-header">Jumlah Pesanan</div>
           <div class="card-body">
             <h5 class="card-title">{{ getCartCount }} Produk (s)</h5>
-            <table class="card-informations">
-              <tr>
-                <th width="70%" class="harga-asli">Harga asli</th>
-                <td width="70%" class="text-right">
+            <div class="card-informations">
+              <tr class="row">
+                <th class="harga-asli col-6">Harga asli</th>
+                <td class="col-6 text-end harga">
                   Rp. {{ moneyFormat(total) }}
                 </td>
               </tr>
-              <tr>
-                <th width="70%" class="harga-stelah-diskon">
-                  Harga setelah diskon
-                </th>
-                <td width="70%" class="text-right">
+              <tr class="row">
+                <th class="harga-stelah-diskon col-6">Harga setelah diskon</th>
+                <td class="col-6 text-end harga">
                   Rp. {{ moneyFormat(total) }}
                 </td>
               </tr>
-            </table>
+            </div>
             <hr />
-            <tr class="total">
-              <th width="70%">Total:</th>
-              <td width="70%" class="text-right">
-                Rp. {{ moneyFormat(total) }}
-              </td>
+            <tr class="total row">
+              <th class="total col-4">Total:</th>
+              <td class="col-8 text-end">Rp. {{ moneyFormat(total) }}</td>
             </tr>
             <i>*sudah termasuk pajak</i>
           </div>
           <a
-            href="#"
+            @click.prevent="checkout"
             class="btn btn-auth btn-pembayaran text-uppercase btn-lg d-grid"
             >lanjutkan ke pembayaran</a
           >
@@ -190,6 +186,63 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+                  <symbol
+                    id="check-circle-fill"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+                    />
+                  </symbol>
+                  <symbol
+                    id="info-fill"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                    />
+                  </symbol>
+                  <symbol
+                    id="exclamation-triangle-fill"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                    />
+                  </symbol>
+                </svg>
+                <div
+                  class="
+                    alert alert-warning
+                    d-flex
+                    align-items-center
+                    alert-dismissible
+                    fade
+                    show
+                  "
+                  role="alert"
+                >
+                  <svg
+                    class="bi flex-shrink-0 me-2"
+                    width="24"
+                    height="24"
+                    role="img"
+                    aria-label="Warning:"
+                  >
+                    <use xlink:href="#exclamation-triangle-fill" />
+                  </svg>
+                  <div>Harap mengisi alamat pengiriman dengan lengkap</div>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
+                </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -225,7 +278,7 @@
                   </div> -->
                     </div>
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="province" class="font-weight-bold"
                         >Provinsi</label
@@ -248,7 +301,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label for="city" class="font-weight-bold"
                         >Kota / kabupaten</label
@@ -267,132 +320,6 @@
                       </select>
                     </div>
                   </div>
-                  <!-- kurir pengiriman -->
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="font-weight-bold mb-3"
-                        >Kurir Pengiriman</label
-                      >
-                      <br />
-                      <!-- jne -->
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="shipping_jne"
-                          value="jne"
-                          v-model="state.courier"
-                          @change="getOngkir"
-                        />
-                        <label class="form-check-label" for="shipping_jne"
-                          >JNE</label
-                        >
-                      </div>
-                      <!-- tiki -->
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="shipping_tiki"
-                          value="tiki"
-                          v-model="state.courier"
-                          @change="getOngkir"
-                        />
-                        <label class="form-check-label" for="shipping_tiki"
-                          >TIKI</label
-                        >
-                      </div>
-                      <!-- pos -->
-                      <div class="form-check form-check-inline">
-                        <input
-                          class="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="shipping_pos"
-                          value="pos"
-                          v-model="state.courier"
-                          @change="getOngkir"
-                        />
-                        <label class="form-check-label" for="shipping_pos"
-                          >POS</label
-                        >
-                      </div>
-                    </div>
-                  </div>
-                  <!-- service kurir serta ongkos kirim -->
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <div>
-                        <hr />
-                        <label class="font-weight-bold mb-3"
-                          >Service Kurir</label
-                        >
-                        <br />
-                        <div class="service-kurier" v-if="state.cost">
-                          <div
-                            class="alert alert-danger"
-                            v-if="state.costs == 0"
-                          >
-                            <span
-                              >Pengiriman
-                              <b>{{ state.courier_type.toUpperCase() }}</b>
-                              tidak ada ke kota tujuan anda</span
-                            >
-                          </div>
-                          <template
-                            v-for="(data, index) of state.costs"
-                            :key="index"
-                          >
-                            <div class="form-check mb-3">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="service"
-                                :id="data.service"
-                                :value="data.cost[0].value + '|' + data.service"
-                                v-model="state.costService"
-                                @change="getCost"
-                              />
-                              <label
-                                class="form-check-label"
-                                :for="data.service"
-                              >
-                                {{ data.service }} - Rp
-                                {{ moneyFormat(data.cost[0].value) }} ({{
-                                  data.cost[0].etd
-                                }}
-                                Hari Pengiriman)
-                              </label>
-                            </div>
-                          </template>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- estimasi -->
-                  <div class="col-md-12">
-                    <div v-if="state.estimasi">
-                      <label class="font-weight-bold mb-3"
-                        >Estimasi Sampai</label
-                      >
-                      <br />
-                      <!-- <span v-if="state.courier_type == 'pos'"
-                    >{{ state.costs[0].cost[0].etd }} Pengiriman</span
-                  >
-                  <span v-else
-                    >{{
-                      state.costs == 0
-                        ? ((state.etd = false),
-                          (state.courier_cost = 0),
-                          (state.grandTotal = 0))
-                        : state.costs[0].cost[0].etd + " Hari Pengiriman"
-                    }}
-                  </span> -->
-                    </div>
-                    <hr />
-                  </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="font-weight-bold" id="alamat"
@@ -405,38 +332,40 @@
                         placeholder="Alamat Lengkap&#10;&#10;Contoh: Perum Badak Triraksa - Tigaraksa Kab. Tangerang"
                         v-model="state.address"
                       ></textarea>
-                      <div class="mt-2 alert alert-danger">
+                      <!-- <div class="mt-2 alert alert-danger">
                         Masukan alamat dengan lengkap
-                      </div>
+                      </div> -->
                     </div>
                   </div>
-                  <!-- <button
-                @click.prevent="checkout"
-                class="btn btn-auth btn-lg btn-block mt-3"
-              >
-                Lanjutkan Ke Pembayaran
-              </button> -->
-                  <!-- <div
-                v-if="state.buttonCheckout || checkout.length > 0"
-                class="col-md-12"
-              >
-                <button
-                  @click.prevent="checkout"
-                  class="btn btn-primary btn-lg btn-block text-uppercase"
-                >
-                  checkout
-                </button>
+                </div>
               </div>
-              <div class="col-md-12" v-else>
-                <div v-if="state.buttonLoading">
-                  <button
-                    class="btn btn-success btn-lg btn-block text-uppercase"
-                  >
-                    <i class="fa fa-spinner fa-spin"></i>Loading
-                  </button>
-                </div>
-              </div> -->
-                </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                <h2><i class="fas fa-truck me-2"></i>Geratis Pengiriman</h2>
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <p>
+                  Kami memberikan pelayanan <strong>gratis pengiriman</strong> ,
+                  ini sebagai service kami kepada custommer, barang akan dikirim
+                  menggunakan jasa truk exspedisi kami.
+                </p>
               </div>
             </div>
           </div>
@@ -494,16 +423,6 @@ export default {
       provinces: [],
       provinsi_id: "",
       cities: [],
-      costs: [],
-      cost: false,
-      estimasi: false,
-      courier: "",
-      courier_type: "",
-      costService: "",
-      ongkir: 0,
-      typeCourier: "",
-      grandTotal: "",
-      hargaAsli: 0,
     });
     /* provinsi */
     const getProvinces = onMounted(() => {
@@ -530,41 +449,6 @@ export default {
         });
     };
 
-    /* mendapatkan ongkos kirim */
-    const getOngkir = () => {
-      // cek berat
-      if (weight.value == 0) {
-        alert("silahkan pilih propduct terlebih dahulu");
-        return;
-      }
-      // ambil data API ongkos kirim
-      Api.post("/rajaongkir/check-ongkir", {
-        city_destination: state.city_id,
-        weight: weight.value,
-        courier: state.courier,
-      })
-        .then((response) => {
-          state.costs = response.data.data[0].costs;
-          state.cost = true;
-          console.log(state.costs);
-        })
-        .catch((error) => {
-          alert(error + " anda harus menentukan kota tujuan");
-        });
-    };
-
-    /* menghitung */
-    const getCost = () => {
-      let shippingCost = state.costService.split("|");
-      state.ongkir = shippingCost[0];
-      state.typeCourier = shippingCost[1];
-      alert(state.typeCourier);
-      // dapatkan API total cart kemudian jumlahkan dengan ongkir
-      Api.get("/cart/total").then((response) => {
-        state.grandTotal =
-          parseInt(response.data.total) + parseInt(state.ongkir);
-      });
-    };
     /* checkout */
     const checkout = () => {
       console.log([
@@ -574,11 +458,6 @@ export default {
         state.note,
         state.provinsi_id,
         state.city_id,
-        weight.value,
-        state.typeCourier,
-        state.ongkir,
-        state.courier,
-        state.grandTotal,
       ]);
     };
 
@@ -589,8 +468,6 @@ export default {
       state,
       getProvinces,
       getCities,
-      getOngkir,
-      getCost,
       checkout,
       weight,
       getCartCount,
