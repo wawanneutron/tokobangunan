@@ -83,6 +83,15 @@
       margin-top: 15px;
       border-radius: unset !important;
     }
+    .btn-pembayaran[disabled] {
+      font-weight: bold !important;
+      letter-spacing: 0;
+      font-size: 15px;
+      margin-top: 15px;
+      border-radius: unset !important;
+      cursor: not-allowed !important;
+      background-color: rgba(255, 0, 0, 0.315);
+    }
   }
 }
 

@@ -35,6 +35,7 @@
                         <img
                           :src="cart.product.gallery[0].image"
                           style="width: 100px; border-radius: 0.5rem"
+                          :title="cart.product.title"
                         />
                       </td>
                       <td>
@@ -43,7 +44,10 @@
                         <div class="price mt-3">
                           Rp. {{ moneyFormat(calculateDiscount(cart.product)) }}
                         </div>
-                        <div class="m-0 diskon">
+                        <div
+                          class="m-0 diskon"
+                          v-if="cart.product.discount != null"
+                        >
                           <s>
                             Rp.
                             {{ moneyFormat(cart.product.price) }}</s
@@ -70,60 +74,6 @@
                 </tbody>
               </table>
             </div>
-            <!-- <div class="form-group">
-              <label class="font-weight-bold" id="note"
-                >Tambahkan catatan pembelian</label
-              >
-              <textarea
-                class="form-control"
-                id="note"
-                rows="3"
-                placeholder="contoh: sepatu ukuran 34, hitam"
-                v-model="state.note"
-              ></textarea>
-            </div>
-            <table class="table table-default">
-              <tbody>
-                <tr>
-                  <td class="text-left" width="60%">
-                    <p class="m-0">Jumlah</p>
-                  </td>
-                  <td class="text-right" width="30%">&nbsp; :</td>
-                  <td class="text-right set-td">
-                    <p class="m-0">Rp. {{ moneyFormat(total) }}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="set-td text-left border-0">
-                    <p class="m-0">
-                      ONGKOS KIRIM (<strong>
-                        {{ calculateKilo(weight) }}
-                      </strong>
-                      Kilogram)
-                    </p>
-                  </td>
-                  <td class="set-td border-0 text-right">&nbsp; :</td>
-                  <td class="set-td border-0 text-right">
-                    <p class="m-0" id="ongkir-cart">
-                      Rp. {{ moneyFormat(state.ongkir) }}
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-left border-0">
-                    <p class="font-weight-bold m-0 h5 text-uppercase">
-                      Grand Total
-                    </p>
-                  </td>
-                  <td class="border-0 text-right">&nbsp; :</td>
-                  <td class="border-0 text-right">
-                    <p class="font-weight-bold m-0 h5" align="right">
-                      Rp. {{ moneyFormat(state.grandTotal) }}
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table> -->
           </div>
         </div>
       </div>
@@ -136,13 +86,23 @@
               <tr class="row">
                 <th class="harga-asli col-6">Harga asli</th>
                 <td class="col-6 text-end harga">
+                  Rp. {{ moneyFormat(beforeDisc) }}
+                </td>
+              </tr>
+              <tr class="row" v-if="beforeDisc === total">
+                <th class="harga-stelah-diskon col-6">Harga setelah diskon</th>
+                <td class="col-6 text-end harga">Rp. 0</td>
+              </tr>
+              <tr class="row" v-else>
+                <th class="harga-stelah-diskon col-6">Harga setelah diskon</th>
+                <td class="col-6 text-end harga">
                   Rp. {{ moneyFormat(total) }}
                 </td>
               </tr>
               <tr class="row">
-                <th class="harga-stelah-diskon col-6">Harga setelah diskon</th>
+                <th class="harga-stelah-diskon col-6">Hemat</th>
                 <td class="col-6 text-end harga">
-                  Rp. {{ moneyFormat(total) }}
+                  Rp. {{ moneyFormat(beforeDisc - total) }}
                 </td>
               </tr>
             </div>
@@ -154,10 +114,22 @@
             <i>*sudah termasuk pajak</i>
           </div>
           <a
+            v-if="state.btnChackout"
             @click.prevent="checkout"
             class="btn btn-auth btn-pembayaran text-uppercase btn-lg d-grid"
             >lanjutkan ke pembayaran</a
           >
+          <a
+            v-if="state.btnChackoutDisabled"
+            class="btn btn-auth btn-pembayaran text-uppercase btn-lg d-grid"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="harap isi form pengiriman"
+            disabled="true"
+          >
+            lanjutkan ke pembayaran
+          </a>
         </div>
       </div>
     </div>
@@ -181,7 +153,7 @@
             </h2>
             <div
               id="collapseOne"
-              class="accordion-collapse collapse show"
+              class="accordion-collapse collapse"
               aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
@@ -235,7 +207,7 @@
                   >
                     <use xlink:href="#exclamation-triangle-fill" />
                   </svg>
-                  <div>Harap mengisi alamat pengiriman dengan lengkap</div>
+                  <div>Harap mengisi form pengiriman dengan lengkap</div>
                   <button
                     type="button"
                     class="btn-close"
@@ -256,9 +228,11 @@
                         placeholder="Nama lengkap"
                         v-model="state.name"
                       />
-                      <!-- <div v-if="validation.name" class="mt-2 alert alert-danger">
-                    Masukan nama lengkap anda
-                  </div> -->
+                      <div v-if="validation.name">
+                        <div class="alert alert-danger mt-1">
+                          Harap mengisi nama lengkap pengirim
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -273,9 +247,11 @@
                         placeholder="No. Hp / Whatsapp"
                         v-model="state.phone"
                       />
-                      <!-- <div v-if="validation.phone" class="mt-2 alert alert-danger">
-                    Masukan No. telpon anda
-                  </div> -->
+                      <div v-if="validation.phone">
+                        <div class="alert alert-danger mt-1">
+                          Harap mengisi no hp/whatsapp
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -320,7 +296,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label class="font-weight-bold" id="alamat"
                         >Alamat Lengkap</label
@@ -332,9 +308,30 @@
                         placeholder="Alamat Lengkap&#10;&#10;Contoh: Perum Badak Triraksa - Tigaraksa Kab. Tangerang"
                         v-model="state.address"
                       ></textarea>
-                      <!-- <div class="mt-2 alert alert-danger">
-                        Masukan alamat dengan lengkap
-                      </div> -->
+                      <div v-if="validation.address">
+                        <div class="alert alert-danger mt-1">
+                          Harap mengisi alamat dengan lengkap
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="font-weight-bold" id="note"
+                        >Catatan pembelian</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="note"
+                        rows="3"
+                        placeholder="contoh: paku ukuran 7cm, besi holo 3 meter"
+                        v-model="state.note"
+                      ></textarea>
+                      <div v-if="validation.note">
+                        <div class="alert alert-danger mt-1">
+                          Harap mengisi catatan pembelian
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -392,6 +389,10 @@ export default {
     const weight = computed(() => {
       return store.getters["cart/getCarWeight"];
     });
+    // getBeforeDiscount
+    const beforeDisc = computed(() => {
+      return store.getters["cart/getBeforeDiscount"];
+    });
 
     const getCartCount = computed(() => {
       return store.getters["cart/getCartCount"];
@@ -414,7 +415,7 @@ export default {
         }
       }
     };
-    /* state untuk menyimpan*/
+    /* state manajemen*/
     const state = reactive({
       name: "",
       phone: "",
@@ -423,6 +424,8 @@ export default {
       provinces: [],
       provinsi_id: "",
       cities: [],
+      btnChackout: true,
+      btnChackoutDisabled: false,
     });
     /* provinsi */
     const getProvinces = onMounted(() => {
@@ -448,17 +451,65 @@ export default {
           alert(error + " silahkan ulangi lagi");
         });
     };
-
+    /* state validations */
+    const validation = reactive({
+      name: false,
+      phone: false,
+      address: false,
+      note: false,
+    });
     /* checkout */
     const checkout = () => {
-      console.log([
-        state.name,
-        state.phone,
-        state.address,
-        state.note,
-        state.provinsi_id,
-        state.city_id,
-      ]);
+      // check apakah ada nama, phone, address, dan berat product
+      if (state.name && state.phone && state.address && state.note) {
+        // state.buttonLoading = true;
+        // state.buttonCheckout = false;
+
+        // define variable
+        let data = {
+          name: state.name,
+          phone: state.phone,
+          province_id: state.provinsi_id,
+          city_id: state.city_id,
+          courier_type: "jne",
+          courier_service: "yes",
+          cost_courier: "70000",
+          address: state.address,
+          grandTotal: total.value,
+        };
+
+        console.log(data);
+        // store
+        //   .dispatch("cart/checkout", data)
+        //   .then((response) => {
+        //     // jika berhasil, arahkan kedetail order dengan parameter snap_token midtrans
+        //     router.push({
+        //       name: "detail_order",
+        //       params: {
+        //         snap_token: response[0].snap_token,
+        //       },
+        //     });
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
+      }
+
+      /* 
+      check validasi 
+      jika state tidak ada isinya validasi bernilai true*/
+      if (!state.name) {
+        validation.name = true;
+      }
+      if (!state.phone) {
+        validation.phone = true;
+      }
+      if (!state.address) {
+        validation.address = true;
+      }
+      if (!state.note) {
+        validation.note = true;
+      }
     };
 
     return {
@@ -471,6 +522,8 @@ export default {
       checkout,
       weight,
       getCartCount,
+      beforeDisc,
+      validation,
     };
   },
 };

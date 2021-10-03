@@ -245,7 +245,7 @@
                   >
                     <div class="card card-product">
                       <div class="product-thumbnail">
-                        <img :src="item.gallery[0].image" alt="card image" />
+                        <img :src="item.gallery[0].image" alt="card image" :title="item.title" />
                       </div>
                       <div class="card-body">
                         <div class="title">{{ item.title }}</div>

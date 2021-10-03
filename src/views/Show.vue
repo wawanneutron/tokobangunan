@@ -26,6 +26,7 @@
               <img
                 :src="gallery[photoActive].image"
                 class="img-store img-fluid w-100"
+                :title="product.title"
               />
             </transition>
             <!-- thumbnail -->
@@ -178,6 +179,7 @@
                     @click="
                       addToCart(
                         state.qty * calculateDiscount(product),
+                        state.qty * product.price,
                         product.id,
                         product.weight * state.qty
                       )
@@ -253,14 +255,14 @@ export default {
       btnMinus: true,
     });
 
-    const addToCart = (price, id, weight) => {
+    const addToCart = (price, price_before, id, weight) => {
       const token = store.state.auth.token;
       if (!token) {
         return router.push({ name: "login" });
       }
-      console.log(price, id, weight, state.qty);
       store.dispatch("cart/addToCart", {
         price: price,
+        price_before: price_before,
         product_id: id,
         weight: weight,
         quantity: state.qty,
