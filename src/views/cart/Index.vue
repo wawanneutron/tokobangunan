@@ -113,12 +113,26 @@
             </tr>
             <i>*sudah termasuk pajak</i>
           </div>
-          <a
-            v-if="state.btnChackout"
-            @click.prevent="checkout"
-            class="btn btn-auth btn-pembayaran text-uppercase btn-lg d-grid"
-            >lanjutkan ke pembayaran</a
-          >
+          <div v-if="state.buttonCheckout || checkout.length > 0">
+            <a
+              @click.prevent="checkout"
+              class="btn btn-auth btn-pembayaran text-uppercase btn-lg d-grid"
+              >lanjutkan ke pembayaran</a
+            >
+          </div>
+          <div v-else>
+            <a
+              v-if="state.buttonLoading"
+              class="btn btn-auth btn-pembayaran text-uppercase btn-lg d-grid"
+              type="button"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="sedang diproses"
+            >
+              <span>Loading <i class="fa fa-spinner fa-spin ms-2"></i></span>
+            </a>
+          </div>
+
           <a
             v-if="state.btnChackoutDisabled"
             class="btn btn-auth btn-pembayaran text-uppercase btn-lg d-grid"
@@ -435,8 +449,9 @@ export default {
       provinces: [],
       provinsi_id: "",
       cities: [],
-      btnChackout: true,
       btnChackoutDisabled: false,
+      buttonCheckout: true,
+      buttonLoading: false,
     });
     /* provinsi */
     const getProvinces = onMounted(() => {
@@ -473,8 +488,8 @@ export default {
     const checkout = () => {
       // check apakah ada nama, phone, address, dan berat product
       if (state.name && state.phone && state.address && state.note) {
-        // state.buttonLoading = true;
-        // state.buttonCheckout = false;
+        state.buttonLoading = true;
+        state.buttonCheckout = false;
 
         // define variable
         let data = {
