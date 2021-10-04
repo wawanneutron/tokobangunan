@@ -15,7 +15,7 @@
       <div class="col-md-3">
         <customer-menu />
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9 detail-order">
         <div class="card card-dashboard border-top-orange border-0 shadow">
           <div class="card-body">
             <div class="title">
@@ -58,7 +58,7 @@
                 <tr>
                   <td>Total pembelian</td>
                   <td>:</td>
-                  <td>Rp. {{ detailOrder.grand_total }}</td>
+                  <td>Rp. {{ moneyFormat(detailOrder.grand_total) }}</td>
                 </tr>
                 <tr>
                   <td>Status</td>
@@ -67,7 +67,7 @@
                     <div v-if="detailOrder.status == 'pending'">
                       <button
                         @click="payment(detailOrder.snap_token)"
-                        class="btn btn-primary"
+                        class="btn btn-auth"
                       >
                         BAYAR SEKARANG
                       </button>
@@ -96,10 +96,7 @@
 
                     <!-- order success -->
                     <div v-else-if="detailOrder.status == 'success'">
-                      <button
-                        @click="payment(detailOrder.snap_token)"
-                        class="btn btn-success"
-                      >
+                      <button class="btn btn-success">
                         {{ detailOrder.status }}
                       </button>
                       <div class="alert alert-success mt-3">
@@ -154,64 +151,141 @@
             </div>
           </div>
         </div>
-        <div
-          class="
-            card card-dashboard
-            border-top-orange border-0
-            rounded
-            shadow
-            mt-4
-          "
-        >
+        <div class="card border-0 rounded shadow mt-4">
           <div class="card-body">
-            <div class="title">
-              <i class="fa fa-shopping-cart"></i>
-              Item Order
-            </div>
+            <h5 class="title">
+              <i class="fas fa-shopping-cart me-2"></i>Detail Order
+            </h5>
             <hr />
-            <table
-              class="table"
-              style="
-                border-style: solid !important;
-                border-color: rgb(198, 206, 214) !important;
-              "
-            >
-              <tbody>
-                <tr
-                  v-for="product in productInOrder"
-                  :key="product.id"
-                  style="background: #edf2f7"
-                >
-                  <td class="b-none" width="25%">
-                    <div class="wrapper-image-cart">
-                      <img
-                        :src="product.product.gallery[0].image"
-                        style="width: 100%; border-radius: 0.5rem"
-                      />
+            <div class="table-responsive">
+              <table class="table">
+                <tbody>
+                  <tr v-for="product in productInOrder" :key="product.id">
+                    <td class="b-none" width="25%">
+                      <div class="wrapper-image-cart">
+                        <img :src="product.product.gallery[0].image" />
+                      </div>
+                    </td>
+                    <td class="b-none" width="50%">
+                      <div class="title">{{ product.product_name }}</div>
+                      <table class="table-borderless" style="font-size: 14px">
+                        <tr>
+                          <td style="padding: 0.2rem">QTY</td>
+                          <td style="padding: 0.2rem">:</td>
+                          <td style="padding: 0.2rem">
+                            <b>{{ product.qty }}</b>
+                          </td>
+                        </tr>
+                      </table>
+                      <div
+                        @click="
+                          (stateReview.order_id = product.id) &&
+                            (stateReview.product_id = product.product_id)
+                        "
+                        @click.prevent="cekOrderId"
+                        class="btn btn-auth-two mt-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-whatever="@getbootstrap"
+                        v-if="detailOrder.status == 'success'"
+                      >
+                        Berikan Ulasan
+                      </div>
+                    </td>
+                    <td class="b-none text-right">
+                      <p class="m-0 font-weight-bold">
+                        Rp. {{ moneyFormat(product.price) }}
+                      </p>
+                    </td>
+                    <!-- modal review -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      data-bs-backdrop="static"
+                      data-bs-keyboard="false"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Ulasan Produk
+                            </h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <!-- handle inputan -->
+                          <div class="modal-body">
+                            <div class="row justify-content-center">
+                              <div class="col-12 col-md-6">
+                                <star-rating
+                                  :star-size="50"
+                                  :show-rating="false"
+                                  :increment="0.5"
+                                  v-model:rating="stateReview.rating"
+                                >
+                                </star-rating>
+                              </div>
+                            </div>
+                            <div class="form-group mt-5">
+                              <label class="font-weight-bold" for="ulasan"
+                                >Tulis Ulasan</label
+                              >
+                              <textarea
+                                id="ulasan"
+                                rows="3"
+                                placeholder="Masukkan Ulasan Produk"
+                                class="form-control"
+                                spellcheck="false"
+                                v-model="stateReview.reviewCustomer"
+                              ></textarea>
+                              <!-- <div class="alert alert-danger" v-if="validation">
+                              {{ validation.value }}
+                            </div> -->
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <div
+                              v-if="
+                                stateReview.buttonKirim ||
+                                submitReview.length > 0
+                              "
+                            >
+                              <button
+                                @click.prevent="submitReview"
+                                class="btn btn-primary"
+                              >
+                                Kirim
+                              </button>
+                            </div>
+                            <div v-else>
+                              <div v-if="stateReview.buttonLoading">
+                                <button class="btn btn-primary">
+                                  <i class="fa fa-spinner fa-spin"></i>Loading
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </td>
-                  <td class="b-none" width="50%">
-                    <h5>
-                      <b>{{ product.product_name }}</b>
-                    </h5>
-                    <table class="table-borderless" style="font-size: 14px">
-                      <tr>
-                        <td style="padding: 0.2rem">QTY</td>
-                        <td style="padding: 0.2rem">:</td>
-                        <td style="padding: 0.2rem">
-                          <b>{{ product.qty }}</b>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                  <td class="b-none text-right">
-                    <p class="m-0 font-weight-bold">
-                      Rp. {{ moneyFormat(product.price) }}
-                    </p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -221,12 +295,16 @@
 <script>
 import CustomerMenu from "@/components/dashboard/Menu.vue";
 import { useStore } from "vuex";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
+import StarRating from "vue-star-rating";
+import Api from "../../api/Api";
 
 export default {
   components: {
     CustomerMenu,
+    StarRating,
   },
   setup() {
     // store vuex
@@ -276,6 +354,16 @@ export default {
       });
     }
 
+    let stateReview = reactive({
+      order_id: "",
+      product_id: "",
+      rating: "",
+      reviewCustomer: "",
+      status: [],
+      buttonKirim: false,
+      buttonLoading: false,
+    });
+
     return {
       store,
       route,
@@ -283,7 +371,116 @@ export default {
       detailOrder,
       productInOrder,
       payment,
+      stateReview,
     };
+  },
+  methods: {
+    // fungsi untuk mengecek length review
+    cekOrderId() {
+      this.stateReview.buttonKirim = true;
+      /* rating atau reaview product oleh customer */
+      // get data token dan user
+      const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      Api.defaults.headers.common["Authorization"] = "Bearer " + token;
+      let orderId = this.stateReview.order_id;
+      // kirim ke server untuk di cek
+      Api.post("/reviewcek", {
+        order_id: orderId,
+        user_id: user.id,
+      })
+        .then((response) => {
+          this.stateReview.status = response.data.review;
+          console.log(this.stateReview.status);
+          // cek jika array belum ada isi nya
+          if (this.stateReview.status.length == 0) {
+            this.$swal("silahkan isi ulasan anda");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    // fungsi untuk menambahkan review / ulasan dan rating
+    submitReview() {
+      this.stateReview.buttonKirim = false;
+      this.stateReview.buttonLoading = true;
+      /* rating atau reaview product oleh customer */
+      // get data token dan user
+      const token = localStorage.getItem("token");
+      const user = JSON.parse(localStorage.getItem("user"));
+
+      Api.defaults.headers.common["Authorization"] = "Bearer " + token;
+      let orderId = this.stateReview.order_id;
+      let productId = this.stateReview.product_id;
+      let rating = this.stateReview.rating;
+      let review = this.stateReview.reviewCustomer;
+      // cek apakah data ada ?
+      if (this.stateReview.status.length <= 0) {
+        Api.post("/review", {
+          customer_id: user.id,
+          order_id: orderId,
+          product_id: productId,
+          rating: rating,
+          review: review,
+        })
+          .then(() => {
+            this.$swal({
+              icon: "success",
+              title: "Yeay...",
+              text: "Terimakasih sudah memebrikan ulasan",
+            });
+            // hapus data di form
+            this.stateReview.rating = "";
+            this.stateReview.reviewCustomer = "";
+            this.stateReview.buttonKirim = true;
+            this.stateReview.buttonLoading = false;
+            // cek lagi isi reviewnya
+            Api.post("/reviewcek", {
+              order_id: orderId,
+              user_id: user.id,
+            })
+              .then((response) => {
+                this.stateReview.status = response.data.review;
+                console.log(this.stateReview.status);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .catch(() => {
+            // hapus data di form
+            this.stateReview.rating = "";
+            this.stateReview.reviewCustomer = "";
+            this.stateReview.buttonLoading = false;
+            this.stateReview.buttonKirim = true;
+
+            this.$swal({
+              icon: "error",
+              title: "Oops...",
+              text: "Harap diisi dengan lengkap",
+            });
+          });
+      } else {
+        // Use sweetalert2
+        this.$swal({
+          icon: "error",
+          title: "Oops...",
+          text: "Anda sudah memberikan ulasan",
+        });
+        this.stateReview.buttonLoading = false;
+        // hapus data di form
+        this.stateReview.rating = "";
+        this.stateReview.reviewCustomer = "";
+      }
+
+      console.log(this.stateReview.reviewCustomer);
+      console.log(this.stateReview.rating);
+      console.log(this.stateReview.order_id);
+      console.log(this.stateReview.product_id);
+    },
   },
 };
 </script>

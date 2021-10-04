@@ -49,31 +49,35 @@
                             name: 'detail_order',
                             params: { snap_token: order.snap_token },
                           }"
-                          class="btn btn-primary"
-                          ><i class="fas fa-eye mr-2"></i>detail</router-link
+                          class="btn btn-sm btn-detail"
+                          ><i class="fas fa-eye me-2"></i>detail</router-link
                         >
                       </td>
                     </tr>
                   </template>
                 </tbody>
               </table>
-              <table class="table table-hover" v-else>
-                <thead>
-                  <tr>
-                    <th scope="col">INVOICE</th>
-                    <th scope="col">NAME</th>
-                    <th scope="col">COURIER</th>
-                    <th scope="col">STATUS</th>
-                    <th scope="col">GRAND TOTAL</th>
-                    <th scope="col">OPTION</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <div class="alert alert-danger text-center h5">
-                    Data Kosong
-                  </div>
-                </tbody>
-              </table>
+              <div v-else>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">INVOICE</th>
+                      <th scope="col">NAME</th>
+                      <th scope="col">COURIER</th>
+                      <th scope="col">STATUS</th>
+                      <th scope="col">GRAND TOTAL</th>
+                      <th scope="col">OPTION</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <div class="alert alert-danger text-center h5">
+                        Data Kosong
+                      </div>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
