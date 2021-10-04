@@ -10,7 +10,7 @@
         </li>
       </ol>
     </nav>
-    <div class="row d-flex justify-content-around">
+    <div class="row d-flex justify-content-around" v-if="carts.length > 0">
       <div class="col-md-8">
         <h2>
           <img src="@/assets/shopping_cart_black_18dp.svg" width="30" alt="" />
@@ -133,7 +133,16 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-else>
+      <div class="cart-empety">
+        <img src="@/assets/remove_shopping_cart_black_48dp.svg" alt="" />
+        <div class="title">Keranjang Anda Kosong!</div>
+        <router-link :to="{ name: 'products' }" class="btn btn-auth"
+          >Lanjutkan Belanja</router-link
+        >
+      </div>
+    </div>
+    <div class="row" v-if="carts.length > 0">
       <div class="col-md-12 rincian-pengiriman">
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
@@ -377,10 +386,12 @@ import { computed, reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
 import Api from "@/api/Api.js";
 import { onMounted } from "@vue/runtime-core";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const store = useStore();
+    const router = useRouter();
 
     onMounted(() => {
       store.dispatch("cart/cartWeight");
@@ -474,25 +485,26 @@ export default {
           courier_type: "jne",
           courier_service: "yes",
           cost_courier: "70000",
+          cartWeight: "10",
           address: state.address,
+          note_pembelian: state.note,
           grandTotal: total.value,
         };
-
         console.log(data);
-        // store
-        //   .dispatch("cart/checkout", data)
-        //   .then((response) => {
-        //     // jika berhasil, arahkan kedetail order dengan parameter snap_token midtrans
-        //     router.push({
-        //       name: "detail_order",
-        //       params: {
-        //         snap_token: response[0].snap_token,
-        //       },
-        //     });
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   });
+        store
+          .dispatch("cart/checkout", data)
+          .then((response) => {
+            // jika berhasil, arahkan kedetail order dengan parameter snap_token midtrans
+            router.push({
+              name: "detail_order",
+              params: {
+                snap_token: response[0].snap_token,
+              },
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
 
       /* 

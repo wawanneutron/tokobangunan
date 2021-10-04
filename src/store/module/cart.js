@@ -21,6 +21,9 @@ const cart = {
     BEFORE_DISCOUNT(state, beforeDiscount) {
       state.beforeDiscount = beforeDiscount;
     },
+    CLEAR_CART(state) {
+      (state.cart = []), (state.total = 0), (state.cartWeight = 0);
+    },
   },
   actions: {
     addToCart(
@@ -122,6 +125,44 @@ const cart = {
       Api.defaults.headers.common["Authorization"] = " Bearer" + token;
       Api.get("/cart/total-weight").then((response) => {
         commit("CART_WEIGHT", response.data.total);
+      });
+    },
+    /* action checkout */
+    checkout({ commit }, data) {
+      // check auth
+      const token = localStorage.getItem("token");
+      Api.defaults.headers.common["Authorization"] = "Bearer " + token;
+
+      return new Promise((resolve, reject) => {
+        Api.post("/checkout", {
+          name: data.name,
+          phone: data.phone,
+          province: data.province_id,
+          city: data.city_id,
+          courier: data.courier_type,
+          service: data.courier_service,
+          cost_courier: data.cost_courier,
+          weight: data.cartWeight,
+          address: data.address,
+          note: data.note_pembelian,
+          grand_total: data.grandTotal,
+        })
+          .then((response) => {
+            resolve(response.data);
+
+            // hapus semua data cart di databse
+            Api.post("/cart/remove-all")
+              .then(() => {
+                //  kirim ke mutation
+                commit("CLEAR_CART");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .catch((error) => {
+            reject(error);
+          });
       });
     },
   },

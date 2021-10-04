@@ -1,6 +1,6 @@
 <template>
   <header class="section-header fixed-top">
-    <section class="header-main">
+    <section class="header-main" :class="{ 'navbar-hidden': !showNavbar }">
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-md-3 col-3">
@@ -185,6 +185,33 @@ export default {
       cartTotal,
       isLoggedIn,
     };
+  },
+  // navbar collapse
+  data: () => ({
+    showNavbar: true,
+    lastScrollPosition: 0,
+  }),
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
+  },
+  methods: {
+    onScroll() {
+      const currentScrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScrollPosition < 0) {
+        return;
+      }
+      // Stop executing this function if the difference between
+      // current scroll position and last scroll position is less than some offset
+      if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 80) {
+        return;
+      }
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition;
+      this.lastScrollPosition = currentScrollPosition;
+    },
   },
 };
 </script>

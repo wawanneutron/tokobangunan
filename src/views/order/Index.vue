@@ -21,7 +21,7 @@
             </div>
             <hr />
             <div class="table-responsive">
-              <table class="table table-hover">
+              <table class="table table-hover" v-if="orders.length > 0">
                 <thead>
                   <tr>
                     <th scope="col">INVOICE</th>
@@ -33,66 +33,45 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <template v-for="order in orders" :key="order.id">
+                    <tr>
+                      <th scope="row">{{ order.invoice }}</th>
+                      <td>{{ order.name }}</td>
+                      <td>
+                        {{ order.courier }} | {{ order.service }} | Rp.
+                        {{ moneyFormat(order.cost_courier) }}
+                      </td>
+                      <td>{{ order.status }}</td>
+                      <td>Rp. {{ moneyFormat(order.grand_total) }}</td>
+                      <td>
+                        <router-link
+                          :to="{
+                            name: 'detail_order',
+                            params: { snap_token: order.snap_token },
+                          }"
+                          class="btn btn-primary"
+                          ><i class="fas fa-eye mr-2"></i>detail</router-link
+                        >
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+              <table class="table table-hover" v-else>
+                <thead>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>
-                      <router-link
-                        :to="{ name: 'detail-order' }"
-                        class="btn btn-sm btn-secondary"
-                      >
-                        <i class="fas fa-eye mr-2"></i> detail
-                      </router-link>
-                    </td>
+                    <th scope="col">INVOICE</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">COURIER</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">GRAND TOTAL</th>
+                    <th scope="col">OPTION</th>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                      <router-link
-                        :to="{ name: 'detail-order' }"
-                        class="btn btn-sm btn-secondary"
-                      >
-                        <i class="fas fa-eye mr-2"></i> detail
-                      </router-link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                    <td>
-                      <router-link
-                        :to="{ name: 'detail-order' }"
-                        class="btn btn-sm btn-secondary"
-                      >
-                        <i class="fas fa-eye mr-2"></i> detail
-                      </router-link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>ok</td>
-                    <td>ok</td>
-                    <td>ok</td>
-                    <td>ok</td>
-                    <td>
-                      <router-link
-                        :to="{ name: 'detail-order' }"
-                        class="btn btn-sm btn-secondary"
-                      >
-                        <i class="fas fa-eye mr-2"></i> detail
-                      </router-link>
-                    </td>
-                  </tr>
+                </thead>
+                <tbody>
+                  <div class="alert alert-danger text-center h5">
+                    Data Kosong
+                  </div>
                 </tbody>
               </table>
             </div>
@@ -104,9 +83,28 @@
 </template>
 <script>
 import CustomerMenu from "@/components/dashboard/Menu.vue";
+import { useStore } from "vuex";
+import { computed, onMounted } from "vue";
 export default {
   components: {
     CustomerMenu,
+  },
+  setup() {
+    // store vuex
+    const store = useStore();
+
+    onMounted(() => {
+      // panggil action getOrder di module order vuex
+      return store.dispatch("order/getOrder");
+    });
+
+    const orders = computed(() => {
+      return store.getters["order/getOrder"];
+    });
+    return {
+      store,
+      orders,
+    };
   },
 };
 </script>

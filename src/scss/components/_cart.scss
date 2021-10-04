@@ -1,4 +1,25 @@
 .chart-product {
+  .cart-empety {
+    margin-bottom: 20vh;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    img {
+      opacity: 20%;
+      width: 100px;
+      margin-top: 50px;
+    }
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+      color: #525252;
+    }
+    .btn-auth {
+      margin-top: 20px;
+      letter-spacing: 3px;
+      font-weight: bold;
+    }
+  }
   h2 {
     font-size: 20px;
     font-weight: 600;

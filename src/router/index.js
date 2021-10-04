@@ -52,8 +52,8 @@ const routes = [
     component: () => import("@/views/order/Index.vue"),
   },
   {
-    path: "/customer/dashboard/order-detail",
-    name: "detail-order",
+    path: "/customer/order/:snap_token",
+    name: "detail_order",
     component: () => import("@/views/order/Detail.vue"),
   },
   {

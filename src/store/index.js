@@ -6,6 +6,7 @@ import carousel from "./module/carousel";
 import category from "./module/category";
 import product from "./module/product";
 import cart from "./module/cart";
+import order from "./module/order";
 
 // create store vuex
 export default createStore({
@@ -15,5 +16,6 @@ export default createStore({
     category,
     product,
     cart,
+    order,
   },
 });
