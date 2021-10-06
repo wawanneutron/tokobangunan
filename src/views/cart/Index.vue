@@ -455,7 +455,7 @@ export default {
     });
     /* provinsi */
     const getProvinces = onMounted(() => {
-      Api.get("/rajaongkir/provinces")
+      Api.get("/origin/provinces")
         .then((response) => {
           state.provinces = response.data.data;
         })
@@ -465,7 +465,7 @@ export default {
     });
     /* kota kabupaten */
     const getCities = () => {
-      Api.get("/rajaongkir/cities", {
+      Api.get("/origin/cities", {
         params: {
           province_id: state.provinsi_id,
         },

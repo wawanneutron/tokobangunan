@@ -53,10 +53,10 @@
             <div class="rating-detail mt-2">
               <star-rating
                 :show-rating="true"
-                :star-size="23"
+                :star-size="25"
                 :read-only="true"
                 :increment="0.01"
-                :rating="4.5"
+                :rating="reviewsAvg"
               ></star-rating>
             </div>
             <div class="price-product mt-4" id="price-product">
@@ -81,10 +81,10 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="font-weight-bold">Berat</td>
+                  <td class="font-weight-bold">Unit</td>
                   <td>:</td>
                   <td>
-                    <span> {{ calculateKilogram(product) }} Kilogram</span>
+                    <span> {{ product.unit }} </span>
                   </td>
                 </tr>
                 <tr>
@@ -179,9 +179,8 @@
                     @click="
                       addToCart(
                         state.qty * calculateDiscount(product),
-                        state.qty * product.price,
-                        product.id,
-                        product.weight * state.qty
+                        state.qty * product.price, //masukan harga sebelum dikon
+                        product.id
                       )
                     "
                     class="btn btn-auth float-md-end btn-lg btn-block mt-4"
@@ -210,12 +209,120 @@
         </div>
       </div>
     </div>
-    <div class="row show-product mt-5">
+    <div class="rowshow-product mt-5">
       <div class="col-md-12">
         <div class="card border-0 rounded shadow">
           <div class="card-body">
-            <h3>Detail product</h3>
-            <p v-html="product.content"></p>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link active"
+                  id="detail-tab"
+                  data-toggle="tab"
+                  href="#detail"
+                  role="tab"
+                  aria-controls="detail"
+                  aria-selected="true"
+                  >Detail Produk</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  class="nav-link"
+                  id="ulasan-tab"
+                  data-toggle="tab"
+                  href="#ulasan"
+                  role="tab"
+                  aria-controls="ulasan"
+                  aria-selected="false"
+                >
+                  <star-rating
+                    :show-rating="true"
+                    :star-size="20"
+                    :read-only="true"
+                    :increment="0.01"
+                    :rating="reviewsAvg"
+                  ></star-rating>
+                  <span
+                    >( <b>{{ countReviews }}</b> ulasan)</span
+                  >
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="detail"
+                role="tabpanel"
+                aria-labelledby="detail-tab"
+              >
+                <div class="mt-4" v-html="product.content"></div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="ulasan"
+                role="tabpanel"
+                aria-labelledby="ulasan-tab"
+                v-if="reviews !== null"
+              >
+                <div class="ulasan mt-5">
+                  <ul class="list-unstyled">
+                    <div
+                      class="card card-body mt-5"
+                      v-for="data in reviews"
+                      :key="data.id"
+                    >
+                      <li class="media">
+                        <img
+                          :src="`https://ui-avatars.com/api/?name=${data.customer.name}&background=1f1235&color=ffffff`"
+                          class="mr-3 rounded-circle"
+                          width="50"
+                          alt="profile"
+                        />
+                        <div class="media-body">
+                          <star-rating
+                            :show-rating="false"
+                            :star-size="21"
+                            :read-only="true"
+                            :increment="0.01"
+                            :rating="data.rating"
+                          ></star-rating>
+                          <h5 class="mt-0 mb-1">{{ data.customer.name }}</h5>
+                          <p>{{ data.review }}</p>
+                        </div>
+                      </li>
+                    </div>
+                    <!-- jika tidak ada ulasan -->
+                    <div class="mt-5" v-if="reviews == 0">
+                      <li class="media">
+                        <div class="media-body">
+                          <div class="alert alert-info">Belum ada ulasan</div>
+                        </div>
+                      </li>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="ulasan"
+                role="tabpanel"
+                aria-labelledby="ulasan-tab"
+                v-if="reviews == null"
+              >
+                <div class="ulasan mt-5">
+                  <ul class="list-unstyled">
+                    <div class="card card-body mt-5">
+                      <li class="media">
+                        <div class="media-body">
+                          <div class="alert alert-info">Belum ada ulasan</div>
+                        </div>
+                      </li>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -255,7 +362,7 @@ export default {
       btnMinus: true,
     });
 
-    const addToCart = (price, price_before, id, weight) => {
+    const addToCart = (price, price_before, id) => {
       const token = store.state.auth.token;
       if (!token) {
         return router.push({ name: "login" });
@@ -264,16 +371,29 @@ export default {
         price: price,
         price_before: price_before,
         product_id: id,
-        weight: weight,
         quantity: state.qty,
       });
     };
+
+    /* reviews customer */
+    const reviews = computed(() => {
+      return store.getters["product/getReviews"].reviews;
+    });
+    const countReviews = computed(() => {
+      return store.getters["product/getReviews"].reviews_count;
+    });
+    const reviewsAvg = computed(() => {
+      return store.getters["product/getReviews"].reviews_avg_rating;
+    });
 
     return {
       product,
       gallery,
       addToCart,
       state,
+      reviews,
+      countReviews,
+      reviewsAvg,
     };
   },
   data: () => ({

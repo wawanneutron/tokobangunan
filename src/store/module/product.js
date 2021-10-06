@@ -9,6 +9,7 @@ const product = {
     allProducts: [],
     detailProduct: {},
     galleries: [],
+    reviews: [],
   },
   mutations: {
     GET_TERLARIS(state, product) {
@@ -25,6 +26,9 @@ const product = {
     },
     GET_GALLERIES(state, data) {
       state.galleries = data;
+    },
+    GET_REVIEWS(state, review) {
+      state.reviews = review;
     },
   },
   actions: {
@@ -60,6 +64,7 @@ const product = {
         .then((response) => {
           commit("GET_DETAIL", response.data.product);
           commit("GET_GALLERIES", response.data.product.gallery);
+          commit("GET_REVIEWS", response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -81,6 +86,9 @@ const product = {
     },
     getGalleries(state) {
       return state.galleries;
+    },
+    getReviews(state) {
+      return state.reviews;
     },
   },
 };

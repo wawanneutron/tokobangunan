@@ -26,7 +26,6 @@
                   <tr>
                     <th scope="col">INVOICE</th>
                     <th scope="col">NAME</th>
-                    <th scope="col">COURIER</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">GRAND TOTAL</th>
                     <th scope="col">OPTION</th>
@@ -37,10 +36,6 @@
                     <tr>
                       <th scope="row">{{ order.invoice }}</th>
                       <td>{{ order.name }}</td>
-                      <td>
-                        {{ order.courier }} | {{ order.service }} | Rp.
-                        {{ moneyFormat(order.cost_courier) }}
-                      </td>
                       <td>{{ order.status }}</td>
                       <td>Rp. {{ moneyFormat(order.grand_total) }}</td>
                       <td>

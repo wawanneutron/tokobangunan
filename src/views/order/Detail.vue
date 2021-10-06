@@ -43,14 +43,6 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>KURIR / SERVICE / COST</td>
-                  <td>:</td>
-                  <td>
-                    {{ detailOrder.courier }} / {{ detailOrder.service }} / Rp.
-                    {{ detailOrder.cost_courier }}
-                  </td>
-                </tr>
-                <tr>
                   <td>Alamat Lengkap</td>
                   <td>:</td>
                   <td>{{ detailOrder.address }}</td>

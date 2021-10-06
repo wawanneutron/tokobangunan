@@ -6,7 +6,6 @@ const cart = {
     cart: [],
     total: 0,
     beforeDiscount: 0,
-    cartWeight: 0,
   },
   mutations: {
     GET_CART(state, cart) {
@@ -15,21 +14,15 @@ const cart = {
     TOTAL_CART(state, total) {
       state.total = total;
     },
-    CART_WEIGHT(state, cartWeight) {
-      state.cartWeight = cartWeight;
-    },
     BEFORE_DISCOUNT(state, beforeDiscount) {
       state.beforeDiscount = beforeDiscount;
     },
     CLEAR_CART(state) {
-      (state.cart = []), (state.total = 0), (state.cartWeight = 0);
+      (state.cart = []), (state.total = 0);
     },
   },
   actions: {
-    addToCart(
-      { commit },
-      { price, price_before, product_id, weight, quantity }
-    ) {
+    addToCart({ commit }, { price, price_before, product_id, quantity }) {
       const token = localStorage.getItem("token");
       const user = JSON.parse(localStorage.getItem("user"));
 
@@ -39,7 +32,6 @@ const cart = {
         price: price,
         price_before: price_before,
         product_id: product_id,
-        weight: weight,
         quantity: quantity,
         customer_id: user.id,
       })
@@ -57,7 +49,7 @@ const cart = {
           });
         })
         .catch((error) => {
-          console.log(error);
+          alert(error);
         });
     },
     cartCount({ commit }) {
@@ -109,24 +101,13 @@ const cart = {
         Api.get("/cart/total").then((response) => {
           commit("TOTAL_CART", response.data.total);
         });
-        // get total weight
-        Api.get("/cart/total-weight").then((response) => {
-          commit("CART_WEIGHT", response.data.total);
-        });
         // get before disc
         Api.get("/cart/before-discount").then((response) => {
           commit("BEFORE_DISCOUNT", response.data.total);
         });
       });
     },
-    /* menghitung berat yang akan dibeli */
-    cartWeight({ commit }) {
-      const token = localStorage.getItem("token");
-      Api.defaults.headers.common["Authorization"] = " Bearer" + token;
-      Api.get("/cart/total-weight").then((response) => {
-        commit("CART_WEIGHT", response.data.total);
-      });
-    },
+
     /* action checkout */
     checkout({ commit }, data) {
       // check auth
@@ -139,12 +120,9 @@ const cart = {
           phone: data.phone,
           province: data.province_id,
           city: data.city_id,
-          courier: data.courier_type,
-          service: data.courier_service,
-          cost_courier: data.cost_courier,
-          weight: data.cartWeight,
           address: data.address,
           note: data.note_pembelian,
+          unit: data.unit,
           grand_total: data.grandTotal,
         })
           .then((response) => {
@@ -175,9 +153,6 @@ const cart = {
     },
     getCartCount(state) {
       return state.cart.length;
-    },
-    getCarWeight(state) {
-      return state.cartWeight;
     },
     getBeforeDiscount(state) {
       return state.beforeDiscount;
