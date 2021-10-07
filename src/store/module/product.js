@@ -38,7 +38,7 @@ const product = {
           commit("GET_TERLARIS", response.data.terlaris);
         })
         .catch((error) => {
-          console.log(error);
+          alert(error + " mohon untuk refresh website");
         });
     },
     homeProducts({ commit }) {
@@ -47,7 +47,7 @@ const product = {
           commit("GET_HOME_PRODUCTS", response.data.product);
         })
         .catch((error) => {
-          console.log(error);
+          alert(error + " mohon untuk refresh website");
         });
     },
     getProductsAll({ commit }) {
@@ -56,7 +56,7 @@ const product = {
           commit("GET_PRODUCTS_ALL", response.data.product);
         })
         .catch((error) => {
-          console.log(error);
+          alert(error + " mohon untuk refresh website");
         });
     },
     detailProduct({ commit }, slug) {
@@ -67,7 +67,7 @@ const product = {
           commit("GET_REVIEWS", response.data);
         })
         .catch((error) => {
-          console.log(error);
+          alert(error + " mohon untuk refresh website");
         });
     },
   },

@@ -107,9 +107,15 @@
 import { reactive, ref } from "@vue/reactivity";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { inject } from "@vue/runtime-core";
 
 export default {
   setup() {
+    const valid = ref([]);
+    const store = useStore();
+    const router = useRouter();
+    const swal = inject("$swal");
+
     // state user
     const user = reactive({
       name: "",
@@ -117,14 +123,6 @@ export default {
       password: "",
       confirm: "",
     });
-    // state validation
-    const valid = ref([]);
-
-    // store vuex
-    const store = useStore();
-
-    // route
-    const router = useRouter();
 
     const register = () => {
       // define variable
@@ -143,11 +141,23 @@ export default {
         })
         .then(() => {
           // redirect halaman
+          swal({
+            icon: "success",
+            title: "Selamat Datang...",
+            text: "Anda sudah terdaftar disistem kami, silahkan pilih barang kesukaan mu",
+            showConfirmButton: true,
+            confirmButtonColor: "#eb0000",
+          });
           router.push({ name: "dashboard" });
         })
         .catch((error) => {
+          swal({
+            icon: "error",
+            title: "Oops...",
+            text: "nampak nya ada kesalahan saat mengisi form",
+            confirmButtonColor: "#eb0000",
+          });
           valid.value = error;
-          console.log(valid);
         });
     };
 

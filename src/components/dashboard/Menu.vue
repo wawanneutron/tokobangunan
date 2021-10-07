@@ -28,21 +28,36 @@
 </template>
 
 <script>
+import { inject } from "@vue/runtime-core";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
     const router = useRouter();
+    const swal = inject("$swal");
 
     const logout = () => {
-      let out = confirm("ingin keluar ?");
-      if (out) {
-        store.dispatch("auth/logout").then(() => {
-          router.push({ name: "login" });
-        });
-      }
-      console.log("oke");
+      swal({
+        title: "yakin ingin logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#eb0000",
+        cancelButtonColor: "#7686ab",
+        confirmButtonText: "Ya, Logout!",
+        cancelButtonText: "Batal",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          store.dispatch("auth/logout").then(() => {
+            router.push({ name: "login" });
+          });
+          swal({
+            title: "Logout Berhasil!",
+            text: "sesi logout berhasil dihapus",
+            icon: "success",
+          });
+        }
+      });
     };
 
     return {

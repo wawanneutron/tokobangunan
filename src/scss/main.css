@@ -659,6 +659,7 @@
   color: #123049 !important;
   /* Chrome, Safari, Edge, Opera */
   /* Firefox */
+  /* ratting */
 }
 
 .show-product h1 {
@@ -726,6 +727,35 @@
   border-left: 2px solid #383838;
   border-top: 2px solid #383838;
   border-bottom: 2px solid #383838;
+}
+
+.show-product .content-description {
+  color: #232f51;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: justify;
+}
+
+.show-product .nav-link {
+  color: #123049;
+  font-weight: 500;
+}
+
+.show-product .text-info {
+  color: #123049 !important;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.show-product .media .media-body h5 {
+  color: #232f51;
+  font-size: 18px;
+}
+
+.show-product .media .media-body p {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #7686ab;
 }
 
 .chart-product .cart-empety {

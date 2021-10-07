@@ -1,5 +1,5 @@
 <template>
-  <div class="container chart-product mb-5 mt-4">
+  <div class="container chart-product mb-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item parent">
@@ -41,6 +41,9 @@
                       <td>
                         <div class="title">{{ cart.product.title }}</div>
                         <div class="qty mt-2">Qty: {{ cart.quantity }}</div>
+                        <div class="qty mt-2">
+                          Unit: {{ cart.product.unit }}
+                        </div>
                         <div class="price mt-3">
                           Rp. {{ moneyFormat(calculateDiscount(cart.product)) }}
                         </div>
@@ -434,15 +437,16 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#eb0000",
         cancelButtonColor: "#7686ab",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Ya, hapus!",
+        cancelButtonText: "Batal",
       }).then((result) => {
         if (result.isConfirmed) {
           store.dispatch("cart/removeCart", cart_id);
-          swal(
-            "Deleted!",
-            "barang di keranjang anda berhasil dihapus",
-            "success"
-          );
+          swal({
+            title: "Deleted!",
+            text: "barang di keranjang anda berhasil dihapus",
+            icon: "success",
+          });
         }
       });
     };
@@ -493,7 +497,14 @@ export default {
     /* checkout */
     const checkout = () => {
       // check apakah ada nama, phone, address, dan berat product
-      if (state.provinsi_id && state.city_id && state.name && state.phone && state.address && state.note) {
+      if (
+        state.name &&
+        state.phone &&
+        state.address &&
+        state.note &&
+        state.provinsi_id &&
+        state.city_id
+      ) {
         state.buttonLoading = true;
         state.buttonCheckout = false;
 
@@ -559,14 +570,14 @@ export default {
           text: "form pengiriman harus terisi dengan lengkap",
         });
       }
-      if (!state.provinsi_id){
+      if (!state.provinsi_id) {
         swal({
           icon: "error",
           title: "Oops...",
           text: "anda belum memilih provinsi tujuan",
         });
       }
-      if (!state.city_id){
+      if (!state.city_id) {
         swal({
           icon: "error",
           title: "Oops...",

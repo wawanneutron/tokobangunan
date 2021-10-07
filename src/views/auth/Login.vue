@@ -65,11 +65,13 @@
 import { reactive, ref } from "@vue/reactivity";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { inject } from "@vue/runtime-core";
 export default {
   setup() {
     const store = useStore();
     const router = useRouter();
     const valid = ref([]);
+    const swal = inject("$swal");
 
     const user = reactive({
       email: "",
@@ -86,9 +88,22 @@ export default {
           pass,
         })
         .then(() => {
+          swal({
+            icon: "success",
+            title: "Selamat Datang...",
+            text: "Anda berhasil login, silahkan pilih barang kesukaan mu",
+            showConfirmButton: true,
+            confirmButtonColor: "#eb0000",
+          });
           router.push({ name: "dashboard" });
         })
         .catch((error) => {
+          swal({
+            icon: "error",
+            title: "Oops...",
+            text: "email atau password yang anda masukan salah",
+            confirmButtonColor: "#eb0000",
+          });
           valid.value = error;
         });
     };

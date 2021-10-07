@@ -62,4 +62,33 @@
     border-top: 2px solid rgb(56, 56, 56);
     border-bottom: 2px solid rgb(56, 56, 56);
   }
+  .content-description {
+    color: $color-text-subheader;
+    font-weight: 300;
+    line-height: 30px;
+    text-align: justify;
+  }
+  .nav-link {
+    color: $color-text-header;
+    font-weight: 500;
+  }
+  .text-info {
+    color: $color-text-header !important;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  /* ratting */
+  .media {
+    .media-body {
+      h5 {
+        color: $color-text-subheader;
+        font-size: 18px;
+      }
+      p {
+        font-size: 14px;
+        margin-top: 10px;
+        color: $color-text-paragraf;
+      }
+    }
+  }
 }

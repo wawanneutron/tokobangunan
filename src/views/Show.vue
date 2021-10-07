@@ -261,7 +261,10 @@
                 role="tabpanel"
                 aria-labelledby="detail-tab"
               >
-                <div class="mt-4" v-html="product.content"></div>
+                <div
+                  class="mt-4 content-description"
+                  v-html="product.content"
+                ></div>
               </div>
               <div
                 class="tab-pane fade"
@@ -279,7 +282,7 @@
                     >
                       <li class="media">
                         <img
-                          :src="`https://ui-avatars.com/api/?name=${data.customer.name}&background=1f1235&color=ffffff`"
+                          :src="`https://ui-avatars.com/api/?name=${data.customer.name}&background=f7e5e5&color=eb0000`"
                           class="mr-3 rounded-circle"
                           width="50"
                           alt="profile"
@@ -287,7 +290,7 @@
                         <div class="media-body">
                           <star-rating
                             :show-rating="false"
-                            :star-size="21"
+                            :star-size="19"
                             :read-only="true"
                             :increment="0.01"
                             :rating="data.rating"
@@ -332,7 +335,7 @@
         </div>
       </div>
       <div class="col-md-5 mt-4">
-        <div class="text-info h6 text-black-50">Term of Service</div>
+        <div class="text-info">Term of Service</div>
         <div class="accordion mt-3" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">

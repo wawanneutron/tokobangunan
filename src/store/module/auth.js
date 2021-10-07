@@ -42,6 +42,8 @@ const auth = {
 
             // kirim data ke mutation
             commit("AUTH_SUCCESS", token, user);
+            // commit  data user ke mutation
+            commit("GET_USER", user);
             resolve(response);
           })
           .catch((error) => {
