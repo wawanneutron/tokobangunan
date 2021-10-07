@@ -1,5 +1,5 @@
 <template>
-  <div class="categories container-fluid">
+  <div class="categories container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item parent">

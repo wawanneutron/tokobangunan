@@ -168,6 +168,13 @@
                             <b>{{ product.qty }}</b>
                           </td>
                         </tr>
+                        <tr>
+                          <td style="padding: 0.2rem">Unit / Satuan</td>
+                          <td style="padding: 0.2rem">:</td>
+                          <td style="padding: 0.2rem">
+                            <b>{{ product.unit }}</b>
+                          </td>
+                        </tr>
                       </table>
                       <div
                         @click="

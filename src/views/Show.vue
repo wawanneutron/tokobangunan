@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5 mb-5">
+  <div class="container mb-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item parent">
@@ -100,7 +100,7 @@
               <div class="row justify-content-around">
                 <div class="col-lg-5 col-md-6">
                   <label for="add-quantity"
-                    ><strong>Qty (PC / Pcs)</strong></label
+                    ><strong>Qty ( {{ product.unit }} )</strong></label
                   >
                   <div class="input-group mb-3 mt-3">
                     <button
@@ -434,21 +434,21 @@
             >
               <div class="accordion-body">
                 Untuk memberikan kemudahan dan kepastian bagi pelanggan dalam
-                melakukan transaksi, pembayaran di wajibkan melalui bank transfer virtual account, saat ini kami mengimplementasikan sistem
-                pembayaran online melalui Midtrans.com.
-                Metode pembayaran yang
-                disediakan adalah card payment, bank transfer, direct debit,
-                e-wallet, over the counter, dan lain-lain. Semua transaksi akan
-                diproses dalam mata uang Rupiah Indonesia. Midtrans memastikan
-                proses pembayaran order Anda aman dengan protokol Secure Sockets
-                Layer (SSL). SSL menyediakan keamanan penuh bagi setiap
-                pelanggan dan kebebasan untuk berbelanja online tanpa rasa
-                khawatir mengenai kemungkinan pencurian informasi kartu kredit.
-                Pembayaran hanya dapat dilakukan menggunakan jasa layanan kami,
-                yaitu menggunakan virtual account yang sudah disediakan oleh
-                sistem, melalui Midtrans pihak toko tidak bertransaksi selain
-                menggunanakan diluar penyedia layanan yang sudah disediakan oleh
-                sistem
+                melakukan transaksi, pembayaran di wajibkan melalui bank
+                transfer virtual account, saat ini kami mengimplementasikan
+                sistem pembayaran online melalui Midtrans.com. Metode pembayaran
+                yang disediakan adalah card payment, bank transfer, direct
+                debit, e-wallet, over the counter, dan lain-lain. Semua
+                transaksi akan diproses dalam mata uang Rupiah Indonesia.
+                Midtrans memastikan proses pembayaran order Anda aman dengan
+                protokol Secure Sockets Layer (SSL). SSL menyediakan keamanan
+                penuh bagi setiap pelanggan dan kebebasan untuk berbelanja
+                online tanpa rasa khawatir mengenai kemungkinan pencurian
+                informasi kartu kredit. Pembayaran hanya dapat dilakukan
+                menggunakan jasa layanan kami, yaitu menggunakan virtual account
+                yang sudah disediakan oleh sistem, melalui Midtrans pihak toko
+                tidak bertransaksi selain menggunanakan diluar penyedia layanan
+                yang sudah disediakan oleh sistem
               </div>
             </div>
           </div>
@@ -458,7 +458,7 @@
   </div>
 </template>
 <script>
-import { computed, onMounted, reactive } from "@vue/runtime-core";
+import { computed, inject, onMounted, reactive } from "@vue/runtime-core";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import StarRating from "vue-star-rating";
@@ -471,6 +471,7 @@ export default {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
+    const swal = inject("$swal");
 
     onMounted(() => {
       store.dispatch("product/detailProduct", route.params.slug);
@@ -500,6 +501,13 @@ export default {
         price_before: price_before,
         product_id: id,
         quantity: state.qty,
+      });
+      swal({
+        icon: "success",
+        title: "Yeay...",
+        text: "Barang berhasil ditambahkan ke keranjang",
+        showConfirmButton: false,
+        timer: 2000,
       });
     };
 

@@ -176,7 +176,7 @@
             </h2>
             <div
               id="collapseOne"
-              class="accordion-collapse collapse"
+              class="accordion-collapse collapse show"
               aria-labelledby="headingOne"
               data-bs-parent="#accordionExample"
             >
@@ -399,13 +399,14 @@
 import { computed, reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
 import Api from "@/api/Api.js";
-import { onMounted } from "@vue/runtime-core";
+import { inject, onMounted } from "@vue/runtime-core";
 import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const store = useStore();
     const router = useRouter();
+    const swal = inject("$swal");
 
     // getBeforeDiscount
     const beforeDisc = computed(() => {
@@ -426,12 +427,24 @@ export default {
     const removeCart = (cart_id) => {
       state.ongkir = 0;
       state.grandTotal = "";
-
-      if (confirm("ingin hapus ?")) {
-        if (confirm("tekan oke")) {
+      swal({
+        title: "yakin ingin menghapus?",
+        text: "setelah menghapus anda tetap bisa memasukan barang ke keranjang",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#eb0000",
+        cancelButtonColor: "#7686ab",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
           store.dispatch("cart/removeCart", cart_id);
+          swal(
+            "Deleted!",
+            "barang di keranjang anda berhasil dihapus",
+            "success"
+          );
         }
-      }
+      });
     };
     /* state manajemen*/
     const state = reactive({
@@ -480,7 +493,7 @@ export default {
     /* checkout */
     const checkout = () => {
       // check apakah ada nama, phone, address, dan berat product
-      if (state.name && state.phone && state.address && state.note) {
+      if (state.provinsi_id && state.city_id && state.name && state.phone && state.address && state.note) {
         state.buttonLoading = true;
         state.buttonCheckout = false;
 
@@ -516,15 +529,49 @@ export default {
       jika state tidak ada isinya validasi bernilai true*/
       if (!state.name) {
         validation.name = true;
+        swal({
+          icon: "error",
+          title: "Oops...",
+          text: "form pengiriman harus terisi dengan lengkap",
+        });
       }
       if (!state.phone) {
         validation.phone = true;
+        swal({
+          icon: "error",
+          title: "Oops...",
+          text: "form pengiriman harus terisi dengan lengkap",
+        });
       }
       if (!state.address) {
         validation.address = true;
+        swal({
+          icon: "error",
+          title: "Oops...",
+          text: "form pengiriman harus terisi dengan lengkap",
+        });
       }
       if (!state.note) {
         validation.note = true;
+        swal({
+          icon: "error",
+          title: "Oops...",
+          text: "form pengiriman harus terisi dengan lengkap",
+        });
+      }
+      if (!state.provinsi_id){
+        swal({
+          icon: "error",
+          title: "Oops...",
+          text: "anda belum memilih provinsi tujuan",
+        });
+      }
+      if (!state.city_id){
+        swal({
+          icon: "error",
+          title: "Oops...",
+          text: "anda belum memilih kota tujuan",
+        });
       }
     };
 
