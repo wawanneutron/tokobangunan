@@ -63,7 +63,7 @@
               <strong class="font-weight-bold me-4"
                 >Rp. {{ moneyFormat(calculateDiscount(product)) }}</strong
               >
-              <span>/ Pc / Pcs</span>
+              <span>/ {{ product.unit }} </span>
               <div>
                 <s class="font-weight-bold" style="font-size: 15px"
                   >Rp. {{ moneyFormat(product.price) }}</s
@@ -209,29 +209,34 @@
         </div>
       </div>
     </div>
-    <div class="rowshow-product mt-5">
-      <div class="col-md-12">
-        <div class="card border-0 rounded shadow">
+  </div>
+  <div class="container-fluid">
+    <div class="show-product justify-content-around row mt-5">
+      <div class="col-md-6">
+        <div class="card border-0">
           <div class="card-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a
+                <button
                   class="nav-link active"
                   id="detail-tab"
-                  data-toggle="tab"
-                  href="#detail"
+                  data-bs-toggle="tab"
+                  data-bs-target="#detail"
+                  type="button"
                   role="tab"
                   aria-controls="detail"
                   aria-selected="true"
-                  >Detail Produk</a
                 >
+                  Detail Produk
+                </button>
               </li>
               <li class="nav-item" role="presentation">
-                <a
+                <button
                   class="nav-link"
                   id="ulasan-tab"
-                  data-toggle="tab"
-                  href="#ulasan"
+                  data-bs-toggle="tab"
+                  data-bs-target="#ulasan"
+                  type="button"
                   role="tab"
                   aria-controls="ulasan"
                   aria-selected="false"
@@ -246,7 +251,7 @@
                   <span
                     >( <b>{{ countReviews }}</b> ulasan)</span
                   >
-                </a>
+                </button>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -321,6 +326,129 @@
                     </div>
                   </ul>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 mt-4">
+        <div class="text-info h6 text-black-50">Term of Service</div>
+        <div class="accordion mt-3" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                Jam Operasional
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Bertransaksi bisa kapan saja di toko online kami, akan tetapi
+                kami memproses pesanan yang masuk sesuai jam kerja kami yaitu
+                senin s/d sabtu jam 07.00 s/d 17.00, pesanan yang lewat jam
+                kerja akan di proses keesokan harinya
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                Ketersediaan Barang
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                dalam melakukan transaksi harap menghubungi admin melalui fitur
+                chat, agar memastikan barang benar benar ready stock
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                Pereturan Barang
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Aturan pereturan barang. Jika barang yang diterima tidak sesuai,
+                kamu bisa mengajukan penggantian barang baru yang sesuai dengan
+                pesanan caranya: Kamu lampiran bukti pembelian atau invoice
+                melalui chat whatsapp yang tertera di website
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#colapseFour"
+                aria-expanded="false"
+                aria-controls="colapseFour"
+              >
+                Kebijakan Pembayaran
+              </button>
+            </h2>
+            <div
+              id="colapseFour"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFour"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                Untuk memberikan kemudahan dan kepastian bagi pelanggan dalam
+                melakukan transaksi, pembayaran di wajibkan melalui bank transfer virtual account, saat ini kami mengimplementasikan sistem
+                pembayaran online melalui Midtrans.com.
+                Metode pembayaran yang
+                disediakan adalah card payment, bank transfer, direct debit,
+                e-wallet, over the counter, dan lain-lain. Semua transaksi akan
+                diproses dalam mata uang Rupiah Indonesia. Midtrans memastikan
+                proses pembayaran order Anda aman dengan protokol Secure Sockets
+                Layer (SSL). SSL menyediakan keamanan penuh bagi setiap
+                pelanggan dan kebebasan untuk berbelanja online tanpa rasa
+                khawatir mengenai kemungkinan pencurian informasi kartu kredit.
+                Pembayaran hanya dapat dilakukan menggunakan jasa layanan kami,
+                yaitu menggunakan virtual account yang sudah disediakan oleh
+                sistem, melalui Midtrans pihak toko tidak bertransaksi selain
+                menggunanakan diluar penyedia layanan yang sudah disediakan oleh
+                sistem
               </div>
             </div>
           </div>

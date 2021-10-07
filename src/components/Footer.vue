@@ -6,26 +6,12 @@
         <div class="col-md-3 mb-4">
           <h4 class="font-weight-bold">Kategori Produk</h4>
           <div class="content">
-            <div class="title">
-              <router-link to="/">Bahan bangunan</router-link>
-            </div>
-            <div class="title">
-              <router-link to="/">Beton Readymix</router-link>
-            </div>
-            <div class="title">
-              <router-link to="/">Dapur (Kitchen)</router-link>
-            </div>
-            <div class="title">
-              <router-link to="/">Door & Window</router-link>
-            </div>
-            <div class="title">
-              <router-link to="/">Home Electronics</router-link>
-            </div>
-            <div class="title">
-              <router-link to="/">Furniture</router-link>
-            </div>
-            <div class="title">
-              <router-link to="/">Bahan bangunan</router-link>
+            <div class="title" v-for="item of categories" :key="item.id">
+              <router-link
+                :to="{ name: 'category', params: { slug: item.slug } }"
+              >
+                <p>{{ item.name }}</p>
+              </router-link>
             </div>
           </div>
         </div>
@@ -130,3 +116,23 @@
     </div>
   </footer>
 </template>
+
+<script>
+import { computed, onMounted } from "@vue/runtime-core";
+import { useStore } from "vuex";
+export default {
+  setup() {
+    const store = useStore();
+
+    onMounted(() => {
+      store.dispatch("category/getHomeCategories");
+    });
+    const categories = computed(() => {
+      return store.getters["category/getHomeCategories"];
+    });
+    return {
+      categories,
+    };
+  },
+};
+</script>

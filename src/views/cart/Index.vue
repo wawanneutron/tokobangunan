@@ -407,13 +407,6 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-    onMounted(() => {
-      store.dispatch("cart/cartWeight");
-    });
-    // get berat
-    const weight = computed(() => {
-      return store.getters["cart/getCarWeight"];
-    });
     // getBeforeDiscount
     const beforeDisc = computed(() => {
       return store.getters["cart/getBeforeDiscount"];
@@ -434,7 +427,7 @@ export default {
       state.ongkir = 0;
       state.grandTotal = "";
 
-      if (confirm("loe mau hapus ?")) {
+      if (confirm("ingin hapus ?")) {
         if (confirm("tekan oke")) {
           store.dispatch("cart/removeCart", cart_id);
         }
@@ -497,10 +490,6 @@ export default {
           phone: state.phone,
           province_id: state.provinsi_id,
           city_id: state.city_id,
-          courier_type: "jne",
-          courier_service: "yes",
-          cost_courier: "70000",
-          cartWeight: "10",
           address: state.address,
           note_pembelian: state.note,
           grandTotal: total.value,
@@ -547,7 +536,6 @@ export default {
       getProvinces,
       getCities,
       checkout,
-      weight,
       getCartCount,
       beforeDisc,
       validation,

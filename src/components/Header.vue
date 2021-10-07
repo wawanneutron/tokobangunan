@@ -178,8 +178,6 @@ export default {
       return store.getters["auth/isLoggedIn"];
     });
 
-    console.log([cartCount, cartTotal]);
-
     return {
       cartCount,
       cartTotal,

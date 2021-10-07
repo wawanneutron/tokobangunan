@@ -47,122 +47,30 @@
     </div>
     <main>
       <div class="row row-kategori mt-5">
-        <div class="col-md-3 mb-3">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-7">
-                <div class="card-thumb">
-                  <img
-                    src="https://www.mitraruma.com/files/regional-production-static-content/assets/Category_images/Bahan%20Bangunan%20(Building%20Materials).jpg"
-                    class="rounded-start"
-                  />
+        <template v-for="item of categories" :key="item.id">
+          <div class="col-md-3 mb-3">
+            <router-link
+              :to="{ name: 'category', params: { slug: item.slug } }"
+            >
+              <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-7">
+                    <div class="card-thumb">
+                      <img :src="item.image" class="rounded-start" />
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        {{ item.name }}
+                      </h5>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-5">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Bahan Bangunan (Building Materials)
-                  </h5>
-                </div>
-              </div>
-            </div>
+            </router-link>
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-7">
-                <div class="card-thumb">
-                  <img
-                    src="https://www.mitraruma.com/files/regional-production-static-content/assets/Category_images/lantai%20&%20dinding.jpg"
-                    class="img-fluid rounded-start"
-                  />
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="card-body">
-                  <h5 class="card-title">Lantai & Dinding</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-7">
-                <div class="card-thumb">
-                  <img
-                    src="https://www.mitraruma.com/files/regional-production-static-content/assets/Category_images/Roof%20and%20Ceiling.jpg"
-                    class="img-fluid rounded-start"
-                  />
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="card-body">
-                  <h5 class="card-title">Roof and Ceiling</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-8">
-                <div class="card-thumb">
-                  <img
-                    src="https://www.mitraruma.com/files/regional-production-static-content/assets/Category_images/Bahan%20Bangunan%20(Building%20Materials).jpg"
-                    class="img-fluid rounded-start"
-                  />
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mb-3">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-7">
-                <div class="card-thumb">
-                  <img
-                    src="https://www.mitraruma.com/files/regional-production-static-content/assets/Category_images/Furniture.jpg"
-                    class="rounded-start"
-                  />
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="card-body">
-                  <h5 class="card-title">Furniture</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 mb-3">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-7">
-                <div class="card-thumb">
-                  <img
-                    src="https://www.mitraruma.com/files/regional-production-static-content/assets/Category_images/Cat%20&%20Perlengkapannya.jpg"
-                    class="rounded-start"
-                  />
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="card-body">
-                  <h5 class="card-title">Cat tembok</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </template>
       </div>
     </main>
   </section>
@@ -327,6 +235,7 @@
     </div>
   </section>
 </template>
+
 <script>
 import Carousel from "@/components/Carousel.vue";
 import { useStore } from "vuex";
@@ -342,26 +251,20 @@ export default {
     const store = useStore();
     // jalankan action vuex ketika borwser di load
     onMounted(() => {
-      // store.dispatch("product/terlaris");
       store.dispatch("product/homeProducts");
-      // store.dispatch("category/headerCategory");
+      store.dispatch("category/getHomeCategories");
     });
 
-    // const terlaris = computed(() => {
-    //   return store.getters["product/getTerlaris"];
-    // });
     const products = computed(() => {
       return store.getters["product/getHomeProducts"];
     });
-
-    // const categories = computed(() => {
-    //   return store.getters["category/getHeaderCategory"];
-    // });
+    const categories = computed(() => {
+      return store.getters["category/getHomeCategories"];
+    });
 
     return {
-      // terlaris,
       products,
-      // categories,
+      categories,
     };
   },
 };

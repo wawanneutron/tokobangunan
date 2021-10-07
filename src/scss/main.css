@@ -484,9 +484,12 @@
           transform: scale(1.5);
 }
 
+.section-kategori .row-kategori a,
 .section-kategori .row-kategori .card-title {
   font-size: 13px;
   font-weight: 600;
+  text-decoration: none;
+  color: #123049;
 }
 
 .mini-banner {
@@ -987,7 +990,7 @@ footer .content {
 }
 
 footer .content .title a {
-  line-height: 40px;
+  line-height: 30px;
   color: #232f51;
   text-decoration: none;
 }

@@ -3,14 +3,14 @@ import Api from "@/api/Api.js";
 const category = {
   namespaced: true,
   state: {
-    headerCategories: [],
+    homeCategories: [],
     allCategories: [],
     productsCategory: [],
     categoryShow: {},
   },
   mutations: {
-    GET_CATEGORY_HEADER(state, category) {
-      state.headerCategories = category;
+    GET_CATEGORY_HOME(state, category) {
+      state.homeCategories = category;
     },
     GET_ALL_CATEGORIES(state, data) {
       state.allCategories = data;
@@ -23,10 +23,10 @@ const category = {
     },
   },
   actions: {
-    headerCategory({ commit }) {
+    getHomeCategories({ commit }) {
       Api.get("/categories-home")
         .then((response) => {
-          commit("GET_CATEGORY_HEADER", response.data.categories);
+          commit("GET_CATEGORY_HOME", response.data.categories);
         })
         .catch((error) => {
           console.log(error);
@@ -53,8 +53,8 @@ const category = {
     },
   },
   getters: {
-    getHeaderCategory(state) {
-      return state.headerCategories;
+    getHomeCategories(state) {
+      return state.homeCategories;
     },
     getAllCategories(state) {
       return state.allCategories;
