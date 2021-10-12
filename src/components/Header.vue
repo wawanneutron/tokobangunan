@@ -13,20 +13,20 @@
             </router-link>
           </div>
           <div class="col-md-5 d-none d-md-block">
-            <form class="search-wrap">
+            <div class="search-wrap">
               <div class="input-group">
                 <input
                   type="text"
                   class="form-control form-search"
-                  placeholder="search..."
-                  aria-label="search..."
-                  aria-describedby="addon-wrapping"
+                  placeholder="search"
+                  aria-label="search"
+                  @click="search"
                 />
                 <span class="input-group-text search-button" id="addon-wrapping"
                   ><i class="fa fa-search"></i
                 ></span>
               </div>
-            </form>
+            </div>
           </div>
           <div class="col-md-4 col-9">
             <div class="d-flex justify-content-end">
@@ -75,20 +75,20 @@
             </button>
           </div>
           <div class="col-10 d-md-none">
-            <form class="search-wrap">
+            <div class="search-wrap">
               <div class="input-group">
                 <input
                   type="text"
                   class="form-control form-search"
-                  placeholder="search..."
-                  aria-label="search..."
-                  aria-describedby="addon-wrapping"
+                  placeholder="search"
+                  aria-label="search"
+                  @click="search"
                 />
                 <span class="input-group-text search-button" id="addon-wrapping"
                   ><i class="fa fa-search"></i
                 ></span>
               </div>
-            </form>
+            </div>
           </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -148,15 +148,20 @@
       </div>
     </nav>
   </header>
+  <modal />
 </template>
 
 <script>
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
+import { useRouter } from 'vue-router';
 export default {
   setup() {
     const store = useStore();
-
+    const router = useRouter();
+    const search = () => {
+      router.push('/products')
+    };
     onMounted(() => {
       // check state token
       const token = store.state.auth.token;
@@ -182,6 +187,7 @@ export default {
       cartCount,
       cartTotal,
       isLoggedIn,
+      search,
     };
   },
   // navbar collapse

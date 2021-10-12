@@ -92,3 +92,59 @@
     }
   }
 }
+@media (max-width: 576px) {
+  .show-product {
+    h1 {
+      font-size: 20px !important;
+      margin-bottom: 15px;
+      text-shadow: none;
+    }
+    strong {
+      font-size: 18px;
+    }
+    .add-quantity {
+      strong {
+        font-size: 14px;
+      }
+    }
+    .btn-auth {
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+
+    .content-description {
+      color: $color-text-subheader;
+      font-weight: 300;
+      line-height: 30px;
+      text-align: justify;
+    }
+    .nav-link {
+      color: $color-text-header;
+      font-weight: 500;
+      padding: 5px;
+    }
+    .text-info {
+      color: $color-text-header !important;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+    /* ratting */
+    .media {
+      .media-body {
+        h5 {
+          color: $color-text-subheader;
+          font-size: 18px;
+        }
+        p {
+          font-size: 14px;
+          margin-top: 10px;
+          color: $color-text-paragraf;
+        }
+      }
+    }
+    .card.card-body {
+      padding: 0;
+      border: none;
+    }
+  }
+}

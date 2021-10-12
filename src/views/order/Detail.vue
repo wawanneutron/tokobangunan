@@ -26,8 +26,8 @@
             <div class="table-responsive">
               <table class="table table-hover">
                 <tr>
-                  <td>No Invoice</td>
-                  <td>:</td>
+                  <td class="w-25">No Invoice</td>
+                  <td width="50">:</td>
                   <td>{{ detailOrder.invoice }}</td>
                 </tr>
                 <tr>
@@ -53,6 +53,11 @@
                   <td>Rp. {{ moneyFormat(detailOrder.grand_total) }}</td>
                 </tr>
                 <tr>
+                  <td>Catatan pembeli</td>
+                  <td>:</td>
+                  <td>{{ detailOrder.note }}</td>
+                </tr>
+                <tr>
                   <td>Status</td>
                   <td>:</td>
                   <td>
@@ -63,13 +68,15 @@
                       >
                         BAYAR SEKARANG
                       </button>
-                      <div class="alert alert-warning mt-2">
+                      <div class="alert alert-warning mt-4">
                         Verifikasi dilakukan secara otomatis
                       </div>
                       <div class="alert alert-info mt-3">
                         Status pembayan anda <b>{{ detailOrder.status }}</b>
                         <br />
-                        Silahkan melakukan pembayaran sekarang
+                        Silahkan melakukan pembayaran dengan
+                        <strong>meng-klik tombol berwarna merah</strong> "Bayar
+                        Sekarang"
                       </div>
                     </div>
                     <!-- pembayaran terverifikasi -->
@@ -93,7 +100,8 @@
                       </button>
                       <div class="alert alert-success mt-3">
                         Pembelian telah selesai <br />
-                        Terimakasih sudah berbelanja di Toko Online kami
+                        Terimakasih sudah berbelanja di Toko Online kami <br />
+                        Silahkan berikan ulasan anda
                       </div>
                     </div>
 
@@ -106,7 +114,6 @@
                       </button>
                       <div class="alert alert-warning mt-3">
                         Barang sedang diproses. <br />
-                        Kami akan segera mengirim no resi
                       </div>
                     </div>
 

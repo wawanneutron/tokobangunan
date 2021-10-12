@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="product-terlaris">
-      <div class="row">
+      <div class="row" v-if="products.length > 0">
         <template v-for="data of products" :key="data.id">
           <div class="col-md-3">
             <router-link :to="{ name: 'detail', params: { slug: data.slug } }">
@@ -64,6 +64,9 @@
             </router-link>
           </div>
         </template>
+      </div>
+      <div v-else class="text-center">
+        <div class="alert alert-danger">Produk belum tersedia</div>
       </div>
     </div>
   </div>
