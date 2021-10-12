@@ -140,6 +140,7 @@ const cart = {
           })
           .catch((error) => {
             reject(error);
+            alert(error + " server error ulangi lagi atau hubungi pihak toko");
           });
       });
     },
