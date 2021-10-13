@@ -120,12 +120,11 @@
                     <div v-else-if="detailOrder.status == 'shipping'">
                       <button
                         @click="payment(detailOrder.snap_token)"
-                        class="btn btn-info"
+                        class="btn btn-secondary"
                       >
                         {{ detailOrder.status }}
                       </button>
                       <div class="alert alert-warning mt-3">
-                        Silahkan check nomor resi. <br />
                         Kami telah mengirim kealamat tujuan anda
                       </div>
                     </div>

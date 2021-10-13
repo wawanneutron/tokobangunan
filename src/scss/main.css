@@ -970,7 +970,7 @@
 }
 
 .chart-product .cart-empety img {
-  opacity: 20%;
+  opacity: 0.2;
   width: 100px;
   margin-top: 50px;
 }

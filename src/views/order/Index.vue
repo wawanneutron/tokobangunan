@@ -36,7 +36,36 @@
                     <tr>
                       <th scope="row">{{ order.invoice }}</th>
                       <td>{{ order.name }}</td>
-                      <td>{{ order.status }}</td>
+                      <td>
+                        <div v-if="order.status == 'success'">
+                          <button class="btn btn-sm btn-success">
+                            <i class="fas fa-check-double"></i> {{ order.status }}
+                          </button>
+                        </div>
+                        <div v-if="order.status == 'payment-success'">
+                          <button class="btn btn-sm btn-success">
+                            <i class="fas fa-check"></i> {{ order.status }}
+                          </button>
+                        </div>
+                        <div v-if="order.status == 'pending'">
+                          <button class="btn btn-sm btn-info">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            {{ order.status }}
+                          </button>
+                        </div>
+                        <div v-if="order.status == 'process'">
+                          <button class="btn btn-sm btn-warning">
+                            <i class="fas fa-people-carry"></i>
+                            {{ order.status }}
+                          </button>
+                        </div>
+                        <div v-if="order.status == 'shipping'">
+                          <button class="btn btn-sm btn-secondary">
+                            <i class="fas fa-truck"></i>
+                            {{ order.status }}
+                          </button>
+                        </div>
+                      </td>
                       <td>Rp. {{ moneyFormat(order.grand_total) }}</td>
                       <td>
                         <router-link

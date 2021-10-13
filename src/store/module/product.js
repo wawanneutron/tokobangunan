@@ -38,7 +38,9 @@ const product = {
           commit("GET_TERLARIS", response.data.terlaris);
         })
         .catch((error) => {
-          alert(error + " mohon untuk refresh website");
+          alert(
+            error + " mohon untuk refresh website, atau hubungi pihak toko"
+          );
         });
     },
     homeProducts({ commit }) {
@@ -47,7 +49,9 @@ const product = {
           commit("GET_HOME_PRODUCTS", response.data.product);
         })
         .catch((error) => {
-          alert(error + " mohon untuk refresh website");
+          alert(
+            error + " mohon untuk refresh website, atau hubungi pihak toko"
+          );
         });
     },
     getProductsAll({ commit }) {
@@ -56,7 +60,9 @@ const product = {
           commit("GET_PRODUCTS_ALL", response.data.product);
         })
         .catch((error) => {
-          alert(error + " mohon untuk refresh website");
+          alert(
+            error + " mohon untuk refresh website, atau hubungi pihak toko"
+          );
         });
     },
     detailProduct({ commit }, slug) {
@@ -67,7 +73,9 @@ const product = {
           commit("GET_REVIEWS", response.data);
         })
         .catch((error) => {
-          alert(error + " mohon untuk refresh website");
+          alert(
+            error + " mohon untuk refresh website, atau hubungi pihak toko"
+          );
         });
     },
   },

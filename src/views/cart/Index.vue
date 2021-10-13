@@ -470,7 +470,7 @@ export default {
           state.provinces = response.data.data;
         })
         .catch((error) => {
-          alert(error + " silahkan ulangi lagi");
+          alert(error + " silahkan ulangi lagi, atau hubungi pihak toko");
         });
     });
     /* kota kabupaten */
@@ -484,7 +484,7 @@ export default {
           state.cities = response.data.data;
         })
         .catch((error) => {
-          alert(error + " silahkan ulangi lagi");
+          alert(error + " silahkan ulangi lagi, atau hubungi pihak toko");
         });
     };
     /* state validations */
