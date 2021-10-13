@@ -6,6 +6,11 @@ import store from "@/store";
 // define a routes
 const routes = [
   {
+    // 404 notfound custom compoenent
+    path: "/:pathMatch(.*)*",
+    component: () => import("@/components/404.vue"),
+  },
+  {
     path: "/",
     name: "home",
     component: () => import("@/views/Home.vue"),
