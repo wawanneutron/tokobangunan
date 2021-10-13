@@ -96,6 +96,11 @@
                 </tr>
               </tbody>
             </table>
+                <div v-if="product.stock == 0">
+                  <span style="font-size: 12px; color: red; font-weight: bold"
+                    >*mohon maaf barang sedang kosong</span
+                  >
+                </div>
             <div class="add-quantity mt-5">
               <div class="row justify-content-around">
                 <div class="col-lg-5 col-md-6">
