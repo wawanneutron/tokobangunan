@@ -154,13 +154,14 @@
 <script>
 import { computed, onMounted } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 export default {
   setup() {
     const store = useStore();
     const router = useRouter();
     const search = () => {
-      router.push('/products')
+      router.push("/products");
+      document.getElementById("app").scrollIntoView();
     };
     onMounted(() => {
       // check state token
