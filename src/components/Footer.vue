@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer id="kontak">
     <hr />
     <div class="container">
       <div class="row justify-content-between">

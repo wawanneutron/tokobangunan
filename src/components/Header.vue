@@ -114,12 +114,12 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="#tentang">
                 <i class="fa fa-info-circle"></i>Tentang</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="#kontak"
                 ><i class="fa fa-comments"></i>Kontak</a
               >
             </li>
