@@ -16,6 +16,7 @@
         <input
           type="text"
           class="form-control form-search-product"
+          autofocus
           placeholder="cari disini"
           aria-label="cari disini"
           aria-describedby="addon-wrapping"
@@ -147,7 +148,7 @@ import StarRating from "vue-star-rating";
 export default {
   components: {
     Products,
-    StarRating
+    StarRating,
   },
   /* search */
   data() {

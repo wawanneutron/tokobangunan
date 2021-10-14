@@ -18,6 +18,8 @@
                 <input
                   type="text"
                   class="form-control form-search"
+                  style="cursor: pointer"
+                  readonly
                   placeholder="search"
                   aria-label="search"
                   @click="search"
@@ -80,6 +82,8 @@
                 <input
                   type="text"
                   class="form-control form-search"
+                  style="cursor: pointer"
+                  readonly
                   placeholder="search"
                   aria-label="search"
                   @click="search"
