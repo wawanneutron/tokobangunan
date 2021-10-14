@@ -1,11 +1,11 @@
 <template>
-  <carousel  id="tentang" />
+  <carousel id="tentang" />
   <section class="container section-service">
-    <div class="text-header text-center" >
+    <div class="text-header text-center">
       <h1>Wujudkan desain impian Anda sesuai anggaran</h1>
     </div>
     <main>
-      <div class="row row-service text-center" >
+      <div class="row row-service text-center">
         <div class="col-md-4">
           <img
             src="https://www.mitraruma.com/_nuxt/img/icon-Value-1-36.1f0b4b1.svg"
