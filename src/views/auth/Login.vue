@@ -16,7 +16,7 @@
                     <i class="fa fa-envelope"></i>
                   </span>
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
                     placeholder="Email"
                     aria-label="Email"
