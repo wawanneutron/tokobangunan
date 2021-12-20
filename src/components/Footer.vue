@@ -111,7 +111,7 @@
       <div class="row sub-footer text-center mt-3 pb-3">
         <div class="col-md-12">
           <hr />
-          © <strong>Online Shop</strong> 2021 • Hak Cipta Dilindungi.
+          ©Hak Cipta Dilindungi.
           <p>dibuat 🇮🇩 dengan sepenuh hati</p>
         </div>
       </div>

@@ -124,13 +124,13 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#tentang">
-                <i class="fa fa-info-circle"></i>Tentang</a
+              <router-link :to="{ name: 'about' }" class="nav-link">
+                <i class="fa fa-info-circle"></i>Tentang</router-link
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#kontak"
-                ><i class="fa fa-comments"></i>Kontak</a
+              <router-link :to="{ name: 'contact' }" class="nav-link"
+                ><i class="fa fa-comments"></i>Kontak</router-link
               >
             </li>
           </ul>
