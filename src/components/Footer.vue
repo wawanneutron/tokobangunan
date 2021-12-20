@@ -35,15 +35,17 @@
             </div>
             <br />
             <div class="alamat">
-              <div class="surel">Surel: cs@mitraruma.com</div>
+              <div class="surel">Surel: help@chackra.com</div>
               <p>
                 <i class="fa fa-clock"></i> Jam Operasional :
                 <br />
-                Senin - Minggu ( 07.00 s/d 16.00 )
+                Senin - jumat, jam ( 08.00 - 17.00 ) <br />
+                Sabtu, jam ( 08.00 - 15.00 )
               </p>
               <p>
-                <i class="fa fa-map-marker"></i> Desa Pete Tigaraksa Kabupaten
-                Tangerang Banten
+                <i class="fa fa-map-marker"></i>
+                Jl Raya cibunar KP Blok masjid kurame RT 002 RW 003 kec Tenjo
+                kab Bogor Jawa barat
               </p>
             </div>
           </div>
