@@ -71,6 +71,16 @@ const routes = [
     name: "login",
     component: () => import("@/views/auth/Login.vue"),
   },
+   {
+    path: "/about",
+    name: "about",
+    component: () => import("@/views/About.vue"),
+  },
+   {
+    path: "/contact",
+    name: "contact",
+    component: () => import("@/views/Contact.vue"),
+  },
 ];
 
 // create router
