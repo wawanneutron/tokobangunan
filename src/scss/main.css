@@ -48,6 +48,10 @@
   bottom: 30px;
 }
 
+#app .contact a {
+  color: #123049;
+}
+
 @media (max-width: 576px) {
   #app {
     font-size: 14px;

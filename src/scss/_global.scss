@@ -44,6 +44,11 @@ $color-text-paragraf: #7686ab;
       bottom: 30px;
     }
   }
+  .contact{
+    a{
+      color: $color-text;
+    }
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
