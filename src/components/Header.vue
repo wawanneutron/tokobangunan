@@ -5,10 +5,16 @@
         <div class="row align-items-center">
           <div class="col-md-3 col-3">
             <router-link to="/" data-abc="true">
-              <img
+              <!-- <img
                 src="https://www.mitraruma.com/_nuxt/img/Logo-Mitraruma.531cabd.svg"
                 alt=""
                 class="img-company"
+              /> -->
+              <img
+                src="../assets/chackra-removebg.png"
+                width="50"
+                alt="PT Chakra Gahana Gemilang"
+                title="PT Chakra Gahana Gemilang"
               />
             </router-link>
           </div>

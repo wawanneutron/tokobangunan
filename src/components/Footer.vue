@@ -37,7 +37,7 @@
             <div class="alamat">
               <div class="surel">Surel: cs@mitraruma.com</div>
               <p>
-                <i class="fa fa-clock"></i> Toko Buka Setiap Hari :
+                <i class="fa fa-clock"></i> Jam Operasional :
                 <br />
                 Senin - Minggu ( 07.00 s/d 16.00 )
               </p>
