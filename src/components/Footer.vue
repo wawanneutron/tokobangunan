@@ -35,7 +35,7 @@
             </div>
             <br />
             <div class="alamat">
-              <div class="surel">Surel: help@chackra.com</div>
+              <div class="surel">Surel: pt.chakra@gmail.com</div>
               <p>
                 <i class="fa fa-clock"></i> Jam Operasional :
                 <br />
