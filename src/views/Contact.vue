@@ -16,7 +16,7 @@
                       class="far fa-envelope fa-3x"
                       style="color: #eb0000"
                     ></i>
-                    <div class="title mt-2">help@chackra.com</div>
+                    <div class="title mt-2">pt.chakra@gmail.com</div>
                   </a>
                 </div>
               </div>
@@ -24,12 +24,12 @@
             <div class="col-md-6">
               <div class="card border-0">
                 <div class="card-body">
-                  <a href="tel:0215546585" class="btn-icon"
+                  <a href="tel:085892967275" class="btn-icon"
                     ><i
                       class="fas fa-phone-alt fa-3x"
                       style="color: #eb0000"
                     ></i>
-                    <div class="title mt-2">0215546585</div>
+                    <div class="title mt-2">0858-9296-7275</div>
                   </a>
                 </div>
               </div>
