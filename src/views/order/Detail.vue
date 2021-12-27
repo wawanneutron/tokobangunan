@@ -132,7 +132,7 @@
                     <button
                       @click="payment(detailOrder.snap_token)"
                       v-else-if="detailOrder.status == 'expired'"
-                      class="btn btn-warning"
+                      class="btn btn-danger bg-danger"
                     >
                       {{ detailOrder.status }}
                     </button>

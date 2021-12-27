@@ -39,7 +39,8 @@
                       <td>
                         <div v-if="order.status == 'success'">
                           <button class="btn btn-sm btn-success">
-                            <i class="fas fa-check-double"></i> {{ order.status }}
+                            <i class="fas fa-check-double"></i>
+                            {{ order.status }}
                           </button>
                         </div>
                         <div v-if="order.status == 'payment-success'">
@@ -62,6 +63,18 @@
                         <div v-if="order.status == 'shipping'">
                           <button class="btn btn-sm btn-secondary">
                             <i class="fas fa-truck"></i>
+                            {{ order.status }}
+                          </button>
+                        </div>
+                        <div v-if="order.status == 'expired'">
+                          <button class="btn btn-sm btn-danger">
+                            <i class="fas fa-times-circle"></i>
+                            {{ order.status }}
+                          </button>
+                        </div>
+                        <div v-if="order.status == 'failed'">
+                          <button class="btn btn-sm btn-danger">
+                            <i class="fas fa-times-circle"></i>
                             {{ order.status }}
                           </button>
                         </div>
