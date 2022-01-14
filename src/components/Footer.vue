@@ -18,22 +18,6 @@
         <div class="col-md-4 mb-4">
           <h4 class="font-weight-bold">Terhubung dengan kami</h4>
           <div class="content">
-            <div class="lingkaran">
-              <a href="#" class="btn-icon" target="_blank"
-                ><i class="fab fa-facebook"></i
-              ></a>
-            </div>
-            <div class="lingkaran">
-              <a href="#" target="_blank" class="btn-icon"
-                ><i class="fab fa-instagram"></i>
-              </a>
-            </div>
-            <div class="lingkaran">
-              <a href="#" target="_blank" class="btn-icon">
-                <i class="fab fa-youtube"></i>
-              </a>
-            </div>
-            <br />
             <div class="alamat">
               <div class="surel">Surel: pt.chakra@gmail.com</div>
               <p>
@@ -111,8 +95,7 @@
       <div class="row sub-footer text-center mt-3 pb-3">
         <div class="col-md-12">
           <hr />
-          ©Hak Cipta Dilindungi.
-          <p>dibuat 🇮🇩 dengan sepenuh hati</p>
+          © 2021 ‐ 2022 Chakra Gahana Gemilang • Hak cipta dilindungi
         </div>
       </div>
     </div>
