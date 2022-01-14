@@ -95,7 +95,8 @@
       <div class="row sub-footer text-center mt-3 pb-3">
         <div class="col-md-12">
           <hr />
-          © 2021 ‐ 2022 Chakra Gahana Gemilang • Hak cipta dilindungi
+          © 2021 &dash; {{ currentYear }} Chakra Gahana Gemilang • Hak cipta
+          dilindungi
         </div>
       </div>
     </div>
@@ -115,8 +116,10 @@ export default {
     const categories = computed(() => {
       return store.getters["category/getHomeCategories"];
     });
+    let currentYear = new Date().getFullYear();
     return {
       categories,
+      currentYear,
     };
   },
 };
